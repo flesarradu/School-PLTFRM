@@ -171,6 +171,9 @@
       <DependentUpon>MeniuProfesor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="rezultate.cs">
+      <DependentUpon>EntityDMBio.tt</DependentUpon>
+    </Compile>
     <Compile Include="SchimbaParola.cs">
       <SubType>Form</SubType>
     </Compile>

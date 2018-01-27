@@ -13,6 +13,7 @@ namespace Biologie
     public partial class Testare : Form
     {
         string test="";
+        string u = "";
         int corecte = 0;
         int numarEnunturi = 0;
         int numarRaspunse = 0;
@@ -22,6 +23,7 @@ namespace Biologie
         {
             InitializeComponent();
             test = tes;
+            u = user;
             // WindowState = FormWindowState.Normal;
             // FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             // Bounds = Screen.PrimaryScreen.Bounds;
@@ -93,7 +95,7 @@ namespace Biologie
             Button butonRaspuns = new Button();
             butonRaspuns.Parent = this;
             butonRaspuns.Location = new Point(1463, 801);
-            butonRaspuns.Size = new Size(239, 64);
+            butonRaspuns.Size = new Size(250, 65);
             butonRaspuns.Text = "Raspunde";
             butonRaspuns.Update();
             butonRaspuns.Show();
@@ -102,8 +104,9 @@ namespace Biologie
                 if (campRaspuns.Text.ToLower() == Enunturi[numarRaspunse-1].raspuns.ToLower())
                 {
                     corecte++;
-                    campRaspuns.Text = "";
+                    
                 }
+                campRaspuns.Text = "";
                 if (numarRaspunse < numarEnunturi)
                 {
                     afiseazaEnunt(Enunturi[numarRaspunse++].id); 
@@ -116,7 +119,13 @@ namespace Biologie
                     {
                         MessageBox.Show(100 * corecte / numarEnunturi + "%");
                         //adauga rezultatul in baza de date
-                        Close();
+                        using (var db = new EntityFBio())
+                        {
+                            db.rezultate.Add(new rezultate { user = u, test = test, rezultat = (corecte / numarEnunturi).ToString() });
+                            db.rezultate.
+                            MessageBox.Show("Rezultatul a fost adaugat in baza de date");
+                        }
+                            Close();
                     }
                 }
             };

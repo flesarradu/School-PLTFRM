@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Database.EFBioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Database.EFBioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="id" />
@@ -29,6 +29,15 @@
           <Property Name="varianta3" Type="nvarchar" MaxLength="50" />
           <Property Name="varianta4" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="rezultate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="user" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rezultat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="test" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="teste">
           <Key>
             <PropertyRef Name="id" />
@@ -41,10 +50,10 @@
         <EntityContainer Name="DatabaseEFBioModelStoreContainer">
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="enunturi" EntityType="Self.enunturi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rezultate" EntityType="Self.rezultate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teste" EntityType="Self.teste" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Database.EFBioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -85,7 +94,17 @@
           <EntitySet Name="accounts" EntityType="Self.accounts" />
           <EntitySet Name="enunturi" EntityType="Self.enunturi" />
           <EntitySet Name="teste" EntityType="Self.teste" />
+          <EntitySet Name="rezultate" EntityType="Database.EFBioModel.rezultate" />
         </EntityContainer>
+        <EntityType Name="rezultate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rezultat" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="test" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -125,6 +144,16 @@
                 <ScalarProperty Name="nume" ColumnName="nume" />
                 <ScalarProperty Name="clasa" ColumnName="clasa" />
                 <ScalarProperty Name="enunturi" ColumnName="enunturi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rezultate">
+            <EntityTypeMapping TypeName="Database.EFBioModel.rezultate">
+              <MappingFragment StoreEntitySet="rezultate">
+                <ScalarProperty Name="test" ColumnName="test" />
+                <ScalarProperty Name="rezultat" ColumnName="rezultat" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
