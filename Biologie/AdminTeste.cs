@@ -15,7 +15,7 @@ namespace Biologie
         public AdminTeste()
         {
             InitializeComponent();
-            FunctiiPublice x = new FunctiiPublice();
+            
             using (var db = new EntityFBio())
             {
                 var query = from x in db.teste select x;

@@ -107,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="accounts.cs">
-      <DependentUpon>EntityDMBio.tt</DependentUpon>
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="AdaugareElev.cs">
       <SubType>Form</SubType>
@@ -133,23 +133,23 @@
     <Compile Include="AdminTeste.Designer.cs">
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
-    <Compile Include="EntityDMBio.Context.cs">
+    <Compile Include="EntityFBio.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityDMBio.Context.tt</DependentUpon>
+      <DependentUpon>EntityFBio.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityDMBio.cs">
+    <Compile Include="EntityFBio.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityDMBio.tt</DependentUpon>
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityDMBio.Designer.cs">
+    <Compile Include="EntityFBio.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityDMBio.edmx</DependentUpon>
+      <DependentUpon>EntityFBio.edmx</DependentUpon>
     </Compile>
     <Compile Include="enunturi.cs">
-      <DependentUpon>EntityDMBio.tt</DependentUpon>
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="FunctiiPublice.cs" />
     <Compile Include="Login.cs">
@@ -172,7 +172,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="rezultate.cs">
-      <DependentUpon>EntityDMBio.tt</DependentUpon>
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="SchimbaParola.cs">
       <SubType>Form</SubType>
@@ -188,16 +188,13 @@
       <DependentUpon>Testare.cs</DependentUpon>
     </Compile>
     <Compile Include="teste.cs">
-      <DependentUpon>EntityDMBio.tt</DependentUpon>
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="VizualizareRezultate.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VizualizareRezultate.Designer.cs">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="_Database_EFBioDataSet.cs">
-      <DependentUpon>_Database_EFBioDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="_Database_EFBioDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -244,12 +241,13 @@
     <EmbeddedResource Include="VizualizareRezultate.resx">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="EntityDMBio.edmx">
+    <EntityDeploy Include="EntityFBio.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntityDMBio.Designer.cs</LastGenOutput>
+      <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityDMBio.edmx.diagram">
-      <DependentUpon>EntityDMBio.edmx</DependentUpon>
+    <None Include="App.Config" />
+    <None Include="EntityFBio.edmx.diagram">
+      <DependentUpon>EntityFBio.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
@@ -275,9 +273,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -293,15 +288,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EntityDMBio.Context.tt">
+    <Content Include="EntityFBio.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityDMBio.edmx</DependentUpon>
-      <LastGenOutput>EntityDMBio.Context.cs</LastGenOutput>
+      <DependentUpon>EntityFBio.edmx</DependentUpon>
+      <LastGenOutput>EntityFBio.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EntityDMBio.tt">
+    <Content Include="EntityFBio.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntityDMBio.edmx</DependentUpon>
-      <LastGenOutput>EntityDMBio.cs</LastGenOutput>
+      <DependentUpon>EntityFBio.edmx</DependentUpon>
+      <LastGenOutput>EntityFBio.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

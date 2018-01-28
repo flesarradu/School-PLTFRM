@@ -29,38 +29,118 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this._Database_EFBioDataSet = new Biologie._Database_EFBioDataSet();
-            this.databaseEFBioDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.testeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.testeTableAdapter = new Biologie._Database_EFBioDataSetTableAdapters.testeTableAdapter();
+            this.rezultateBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.rezultateTableAdapter = new Biologie._Database_EFBioDataSetTableAdapters.rezultateTableAdapter();
+            this.userDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rezultatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.testDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._Database_EFBioDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseEFBioDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.testeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rezultateBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.userDataGridViewTextBoxColumn,
+            this.rezultatDataGridViewTextBoxColumn,
+            this.testDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.rezultateBindingSource;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(915, 723);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // _Database_EFBioDataSet
             // 
             this._Database_EFBioDataSet.DataSetName = "_Database_EFBioDataSet";
             this._Database_EFBioDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // databaseEFBioDataSetBindingSource
+            // testeBindingSource
             // 
-            this.databaseEFBioDataSetBindingSource.DataSource = this._Database_EFBioDataSet;
-            this.databaseEFBioDataSetBindingSource.Position = 0;
+            this.testeBindingSource.DataMember = "teste";
+            this.testeBindingSource.DataSource = this._Database_EFBioDataSet;
+            // 
+            // testeTableAdapter
+            // 
+            this.testeTableAdapter.ClearBeforeFill = true;
+            // 
+            // rezultateBindingSource
+            // 
+            this.rezultateBindingSource.DataMember = "rezultate";
+            this.rezultateBindingSource.DataSource = this._Database_EFBioDataSet;
+            // 
+            // rezultateTableAdapter
+            // 
+            this.rezultateTableAdapter.ClearBeforeFill = true;
+            // 
+            // userDataGridViewTextBoxColumn
+            // 
+            this.userDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.userDataGridViewTextBoxColumn.DataPropertyName = "user";
+            this.userDataGridViewTextBoxColumn.HeaderText = "Utilizator";
+            this.userDataGridViewTextBoxColumn.Name = "userDataGridViewTextBoxColumn";
+            this.userDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rezultatDataGridViewTextBoxColumn
+            // 
+            this.rezultatDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.rezultatDataGridViewTextBoxColumn.DataPropertyName = "rezultat";
+            this.rezultatDataGridViewTextBoxColumn.HeaderText = "Rezultat";
+            this.rezultatDataGridViewTextBoxColumn.Name = "rezultatDataGridViewTextBoxColumn";
+            this.rezultatDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // testDataGridViewTextBoxColumn
+            // 
+            this.testDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.testDataGridViewTextBoxColumn.DataPropertyName = "test";
+            this.testDataGridViewTextBoxColumn.HeaderText = "Testul";
+            this.testDataGridViewTextBoxColumn.Name = "testDataGridViewTextBoxColumn";
+            this.testDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // VizualizareRezultate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 754);
+            this.ClientSize = new System.Drawing.Size(915, 723);
+            this.Controls.Add(this.dataGridView1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "VizualizareRezultate";
             this.Text = "VizualizareRezultate";
+            this.Load += new System.EventHandler(this.VizualizareRezultate_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._Database_EFBioDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.databaseEFBioDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.testeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rezultateBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.DataGridView dataGridView1;
         private _Database_EFBioDataSet _Database_EFBioDataSet;
-        private System.Windows.Forms.BindingSource databaseEFBioDataSetBindingSource;
+        private System.Windows.Forms.BindingSource testeBindingSource;
+        private _Database_EFBioDataSetTableAdapters.testeTableAdapter testeTableAdapter;
+        private System.Windows.Forms.BindingSource rezultateBindingSource;
+        private _Database_EFBioDataSetTableAdapters.rezultateTableAdapter rezultateTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rezultatDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn testDataGridViewTextBoxColumn;
     }
 }
