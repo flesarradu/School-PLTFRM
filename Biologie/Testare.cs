@@ -73,6 +73,8 @@ namespace Biologie
                 {
                     if (x.tip == 1)
                         afiseazaEnunt1(x.enunt, x.raspuns);
+                    else if (x.tip == 0)
+                        afiseazaEnunt0(x.enunt, x.raspuns, x.varianta1, x.varianta2, x.varianta3, x.varianta4);
                 }
             }
         }
@@ -117,19 +119,76 @@ namespace Biologie
                     DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
                     if (rez == DialogResult.Yes)
                     {
-                        MessageBox.Show(100 * corecte / numarEnunturi + "%");
-                        //adauga rezultatul in baza de date
-                        using (var db = new EntityFBio())
-                        {
-                            db.rezultate.Add(new rezultate { user = u, test = test, rezultat = (corecte / numarEnunturi).ToString() });
-                            db.rezultate.
-                            MessageBox.Show("Rezultatul a fost adaugat in baza de date");
-                        }
-                            Close();
+                      finalizareTest();
+                      Close();
                     }
                 }
             };
         }
+        private void finalizareTest()
+        {
+            using (var db = new EntityFBio())
+            {
+                var query = from x in db.rezultate select x;
+                int ID = query.Max(x => x.id);
+                db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat = (100 * corecte / numarEnunturi).ToString() });
+                db.SaveChanges();
+                MessageBox.Show("Rezultat: " + 100 * corecte / numarEnunturi + "%");
+            }
+        }
+        private void afiseazaEnunt0(string enunt, string raspuns, string v1, string v2, string v3, string v4)
+        {
+            int x = 70, y = 350;
+            labelCerinta.Text = enunt;
 
+            Button butonRaspuns = new Button();
+            butonRaspuns.Parent = this;
+            butonRaspuns.Location = new Point(1463, 801);
+            butonRaspuns.Size = new Size(250, 65);
+            butonRaspuns.Text = "Raspunde";
+            butonRaspuns.Update();
+            butonRaspuns.Show();
+            
+
+            //Checkbox Variante
+            CheckBox[] labels = new CheckBox[4];
+            
+            for (int i = 0; i < 4; i++)
+            {
+                labels[i] = new CheckBox();
+                labels[i].Parent = this;
+                labels[i].Size = new Size(1650, 55);
+                labels[i].Location = new Point(x, y+=70);
+                labels[i].Update();
+                labels[i].Show();
+            }
+            labels[0].Text = v1;
+            labels[1].Text = v2;
+            labels[2].Text = v3;
+            labels[3].Text = v4;
+            butonRaspuns.Click += (s, args) => {
+                for(int i=0;i<4;i++)
+                {
+                    if(labels[i].Checked)
+                    {
+                        if (labels[i].Text == raspuns)
+                            corecte++;
+                        if(numarRaspunse<numarEnunturi)
+                            afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                        else
+                        {
+                            DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
+                            if (rez == DialogResult.Yes)
+                            {
+                                finalizareTest();
+                                Close();
+                            }
+                        }
+                        
+                    }
+                }
+
+            };
+        }
     }
 }

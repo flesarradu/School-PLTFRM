@@ -190,6 +190,15 @@
     <Compile Include="teste.cs">
       <DependentUpon>EntityDMBio.tt</DependentUpon>
     </Compile>
+    <Compile Include="VizualizareRezultate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VizualizareRezultate.Designer.cs">
+      <DependentUpon>VizualizareRezultate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_Database_EFBioDataSet.cs">
+      <DependentUpon>_Database_EFBioDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="_Database_EFBioDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -231,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Testare.resx">
       <DependentUpon>Testare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VizualizareRezultate.resx">
+      <DependentUpon>VizualizareRezultate.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="EntityDMBio.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

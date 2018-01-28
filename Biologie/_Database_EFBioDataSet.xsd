@@ -235,7 +235,7 @@ SELECT id, nume, clasa, enunturi FROM teste WHERE (id = @id)</CommandText>
   <xs:element name="_Database_EFBioDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="_Database_EFBioDataSet" msprop:Generator_UserDSName="_Database_EFBioDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="accounts" msprop:Generator_TableClassName="accountsDataTable" msprop:Generator_TableVarName="tableaccounts" msprop:Generator_TablePropName="accounts" msprop:Generator_RowDeletingName="accountsRowDeleting" msprop:Generator_RowChangingName="accountsRowChanging" msprop:Generator_RowEvHandlerName="accountsRowChangeEventHandler" msprop:Generator_RowDeletedName="accountsRowDeleted" msprop:Generator_UserTableName="accounts" msprop:Generator_RowChangedName="accountsRowChanged" msprop:Generator_RowEvArgName="accountsRowChangeEvent" msprop:Generator_RowClassName="accountsRow">
+        <xs:element name="accounts" msprop:Generator_TableClassName="accountsDataTable" msprop:Generator_TableVarName="tableaccounts" msprop:Generator_RowChangedName="accountsRowChanged" msprop:Generator_TablePropName="accounts" msprop:Generator_RowDeletingName="accountsRowDeleting" msprop:Generator_RowChangingName="accountsRowChanging" msprop:Generator_RowEvHandlerName="accountsRowChangeEventHandler" msprop:Generator_RowDeletedName="accountsRowDeleted" msprop:Generator_RowClassName="accountsRow" msprop:Generator_UserTableName="accounts" msprop:Generator_RowEvArgName="accountsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -264,7 +264,7 @@ SELECT id, nume, clasa, enunturi FROM teste WHERE (id = @id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="enunturi" msprop:Generator_TableClassName="enunturiDataTable" msprop:Generator_TableVarName="tableenunturi" msprop:Generator_TablePropName="enunturi" msprop:Generator_RowDeletingName="enunturiRowDeleting" msprop:Generator_RowChangingName="enunturiRowChanging" msprop:Generator_RowEvHandlerName="enunturiRowChangeEventHandler" msprop:Generator_RowDeletedName="enunturiRowDeleted" msprop:Generator_UserTableName="enunturi" msprop:Generator_RowChangedName="enunturiRowChanged" msprop:Generator_RowEvArgName="enunturiRowChangeEvent" msprop:Generator_RowClassName="enunturiRow">
+        <xs:element name="enunturi" msprop:Generator_TableClassName="enunturiDataTable" msprop:Generator_TableVarName="tableenunturi" msprop:Generator_RowChangedName="enunturiRowChanged" msprop:Generator_TablePropName="enunturi" msprop:Generator_RowDeletingName="enunturiRowDeleting" msprop:Generator_RowChangingName="enunturiRowChanging" msprop:Generator_RowEvHandlerName="enunturiRowChangeEventHandler" msprop:Generator_RowDeletedName="enunturiRowDeleted" msprop:Generator_RowClassName="enunturiRow" msprop:Generator_UserTableName="enunturi" msprop:Generator_RowEvArgName="enunturiRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
@@ -315,7 +315,7 @@ SELECT id, nume, clasa, enunturi FROM teste WHERE (id = @id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="teste" msprop:Generator_TableClassName="testeDataTable" msprop:Generator_TableVarName="tableteste" msprop:Generator_TablePropName="teste" msprop:Generator_RowDeletingName="testeRowDeleting" msprop:Generator_RowChangingName="testeRowChanging" msprop:Generator_RowEvHandlerName="testeRowChangeEventHandler" msprop:Generator_RowDeletedName="testeRowDeleted" msprop:Generator_UserTableName="teste" msprop:Generator_RowChangedName="testeRowChanged" msprop:Generator_RowEvArgName="testeRowChangeEvent" msprop:Generator_RowClassName="testeRow">
+        <xs:element name="teste" msprop:Generator_TableClassName="testeDataTable" msprop:Generator_TableVarName="tableteste" msprop:Generator_RowChangedName="testeRowChanged" msprop:Generator_TablePropName="teste" msprop:Generator_RowDeletingName="testeRowDeleting" msprop:Generator_RowChangingName="testeRowChanging" msprop:Generator_RowEvHandlerName="testeRowChangeEventHandler" msprop:Generator_RowDeletedName="testeRowDeleted" msprop:Generator_RowClassName="testeRow" msprop:Generator_UserTableName="teste" msprop:Generator_RowEvArgName="testeRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
