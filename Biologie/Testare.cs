@@ -98,7 +98,7 @@ namespace Biologie
                             corecte++;
                             
                         }
-                        else
+                        labels[i].CheckState = CheckState.Unchecked;
                             
                         if (numarRaspunse < numarEnunturi)
                         {
