@@ -49,5 +49,13 @@ namespace Biologie
             visa.Closed += (s, args) => Show();
             visa.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            VizualizareRezultate visa = new VizualizareRezultate();
+            Hide();
+            visa.FormClosed += (s, args) => Show();
+            visa.Show();
+        }
     }
 }

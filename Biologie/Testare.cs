@@ -19,18 +19,40 @@ namespace Biologie
         int numarRaspunse = 0;
        // Label cerinta = new Label();
         List<enunturi> Enunturi = new List<enunturi>();
+        CheckBox[] labels = new CheckBox[4];
+        TextBox campRaspuns = new TextBox();
+        Button butonRaspuns = new Button();
+        Button butonRaspuns1 = new Button();
+       
         public Testare(string user, string tes)
         {
             InitializeComponent();
             test = tes;
             u = user;
+            //BUTOANE
+            butonRaspuns1.Parent = this;
+            butonRaspuns1.Location = new Point(1463, 801);
+            butonRaspuns1.Size = new Size(250, 65);
+            butonRaspuns1.Text = "Raspunde";
+            butonRaspuns1.Update();
+            campRaspuns.Parent = this;
+            campRaspuns.Text = "";
+            campRaspuns.Location = new Point(25, 400);
+            campRaspuns.Size = new Size(470, 61);
+            campRaspuns.Update();
+            butonRaspuns.Parent = this;
+            butonRaspuns.Location = new Point(1463, 801);
+            butonRaspuns.Size = new Size(250, 65);
+            butonRaspuns.Text = "Raspunde";
+            butonRaspuns.Update();
+
             // WindowState = FormWindowState.Normal;
             // FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             // Bounds = Screen.PrimaryScreen.Bounds;
             //Activate();
             List<Test> enunturiTest = new List<Test>();
             using (var db = new EntityFBio())
-            {
+            {   
                 string enunturi = "";
                 var query = from y in db.teste select y;
                 foreach (var y in query)
@@ -56,8 +78,69 @@ namespace Biologie
                     }
                 }
             }
+            butonRaspuns.Click += (s, args) => {
+                MessageBox.Show("BUTON TIP 0");
+                for (int i = 0; i < 4; i++)
+                {
+                    if (labels[i].Checked)
+                    {
+                        for (int j = 0; j < 4; j++)
+                        {
+                            labels[j].Hide();
+                        }
+                        if (labels[i].Text == Enunturi[numarRaspunse - 1].raspuns.ToLower())
+                        {
+                            corecte++;
+                            MessageBox.Show("CORECT");
+                        }
+                        else
+                            MessageBox.Show("INCORECT");
+                        if (numarRaspunse < numarEnunturi)
+                        {
+
+                            afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                        }
+                        else
+                        {
+                            DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
+                            if (rez == DialogResult.Yes)
+                            {
+                                finalizareTest();
+                                Close();
+                            }
+                        }
+
+                    }
+                }
+
+            };
+            butonRaspuns1.Click += (s, args) =>
+            {
+                MessageBox.Show("BUTON TIP 1");
+                butonRaspuns.Hide();
+                campRaspuns.Hide();
+                if (campRaspuns.Text.ToLower() == Enunturi[numarRaspunse - 1].raspuns.ToLower())
+                {
+                    corecte++;
+                }
+                campRaspuns.Text = "";
+                if (numarRaspunse < numarEnunturi)
+                {
+                    afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                }
+
+                else
+                {
+                    DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
+                    if (rez == DialogResult.Yes)
+                    {
+                        finalizareTest();
+                        Close();
+                    }
+                }
+            };
             afiseazaEnunt(Enunturi[numarRaspunse++].id);
-                
+            
             
         }
 
@@ -81,49 +164,24 @@ namespace Biologie
         
         private void afiseazaEnunt1(string enunt, string raspuns)
         {
-            
+            butonRaspuns.Hide();
+            for (int i=0;i<4;i++)
+            {
+                labels[i] = new CheckBox();
+                labels[i].Hide();
+            }
             labelCerinta.Text = enunt;
             
             //Camp de Raspuns
-            TextBox campRaspuns = new TextBox();
-            campRaspuns.Parent = this;
-            campRaspuns.Text = "";
-            campRaspuns.Location = new Point(25, 400);
-            campRaspuns.Size = new Size(470, 61);
-            campRaspuns.Update();
+            
+            
             campRaspuns.Show();
 
             //Buton raspuns
-            Button butonRaspuns = new Button();
-            butonRaspuns.Parent = this;
-            butonRaspuns.Location = new Point(1463, 801);
-            butonRaspuns.Size = new Size(250, 65);
-            butonRaspuns.Text = "Raspunde";
-            butonRaspuns.Update();
-            butonRaspuns.Show();
-            butonRaspuns.Click += (s, args) =>
-            {
-                if (campRaspuns.Text.ToLower() == Enunturi[numarRaspunse-1].raspuns.ToLower())
-                {
-                    corecte++;
-                    
-                }
-                campRaspuns.Text = "";
-                if (numarRaspunse < numarEnunturi)
-                {
-                    afiseazaEnunt(Enunturi[numarRaspunse++].id); 
-                }
-
-                else
-                {
-                    DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
-                    if (rez == DialogResult.Yes)
-                    {
-                      finalizareTest();
-                      Close();
-                    }
-                }
-            };
+           
+           
+            butonRaspuns1.Show();
+            
         }
         private void finalizareTest()
         {
@@ -138,21 +196,13 @@ namespace Biologie
         }
         private void afiseazaEnunt0(string enunt, string raspuns, string v1, string v2, string v3, string v4)
         {
+
+            campRaspuns.Hide();
+            butonRaspuns1.Hide();
             int x = 70, y = 350;
             labelCerinta.Text = enunt;
-
-            Button butonRaspuns = new Button();
-            butonRaspuns.Parent = this;
-            butonRaspuns.Location = new Point(1463, 801);
-            butonRaspuns.Size = new Size(250, 65);
-            butonRaspuns.Text = "Raspunde";
-            butonRaspuns.Update();
             butonRaspuns.Show();
-            
-
-            //Checkbox Variante
-            CheckBox[] labels = new CheckBox[4];
-            
+            //Checkbox Variante           
             for (int i = 0; i < 4; i++)
             {
                 labels[i] = new CheckBox();
@@ -165,30 +215,7 @@ namespace Biologie
             labels[0].Text = v1;
             labels[1].Text = v2;
             labels[2].Text = v3;
-            labels[3].Text = v4;
-            butonRaspuns.Click += (s, args) => {
-                for(int i=0;i<4;i++)
-                {
-                    if(labels[i].Checked)
-                    {
-                        if (labels[i].Text == raspuns)
-                            corecte++;
-                        if(numarRaspunse<numarEnunturi)
-                            afiseazaEnunt(Enunturi[numarRaspunse++].id);
-                        else
-                        {
-                            DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
-                            if (rez == DialogResult.Yes)
-                            {
-                                finalizareTest();
-                                Close();
-                            }
-                        }
-                        
-                    }
-                }
-
-            };
+            labels[3].Text = v4;          
         }
     }
 }
