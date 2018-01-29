@@ -30,6 +30,7 @@ namespace Biologie
             test = tes;
             u = user;
             //BUTOANE
+            int yx = 70, xy = 350;
             butonRaspuns1.Parent = this;
             butonRaspuns1.Location = new Point(1463, 801);
             butonRaspuns1.Size = new Size(250, 65);
@@ -45,6 +46,14 @@ namespace Biologie
             butonRaspuns.Size = new Size(250, 65);
             butonRaspuns.Text = "Raspunde";
             butonRaspuns.Update();
+            for(int i=0;i<4;i++)
+            {
+                labels[i] = new CheckBox();
+                labels[i].Parent = this;
+                labels[i].Size = new Size(1650, 55);
+                labels[i].Location = new Point(yx, xy += 70);
+                labels[i].Update();
+            }
 
             // WindowState = FormWindowState.Normal;
             // FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -79,25 +88,20 @@ namespace Biologie
                 }
             }
             butonRaspuns.Click += (s, args) => {
-                MessageBox.Show("BUTON TIP 0");
+                
                 for (int i = 0; i < 4; i++)
                 {
                     if (labels[i].Checked)
                     {
-                        for (int j = 0; j < 4; j++)
-                        {
-                            labels[j].Hide();
-                        }
-                        if (labels[i].Text == Enunturi[numarRaspunse - 1].raspuns.ToLower())
+                        if (labels[i].Text.ToLower() == Enunturi[numarRaspunse - 1].raspuns.ToLower())
                         {
                             corecte++;
-                            MessageBox.Show("CORECT");
+                            
                         }
                         else
-                            MessageBox.Show("INCORECT");
+                            
                         if (numarRaspunse < numarEnunturi)
                         {
-
                             afiseazaEnunt(Enunturi[numarRaspunse++].id);
                         }
                         else
@@ -115,8 +119,7 @@ namespace Biologie
 
             };
             butonRaspuns1.Click += (s, args) =>
-            {
-                MessageBox.Show("BUTON TIP 1");
+            { 
                 butonRaspuns.Hide();
                 campRaspuns.Hide();
                 if (campRaspuns.Text.ToLower() == Enunturi[numarRaspunse - 1].raspuns.ToLower())
@@ -167,19 +170,17 @@ namespace Biologie
             butonRaspuns.Hide();
             for (int i=0;i<4;i++)
             {
-                labels[i] = new CheckBox();
                 labels[i].Hide();
             }
             labelCerinta.Text = enunt;
             
             //Camp de Raspuns
-            
-            
+ 
+       
             campRaspuns.Show();
 
             //Buton raspuns
-           
-           
+
             butonRaspuns1.Show();
             
         }
@@ -199,17 +200,12 @@ namespace Biologie
 
             campRaspuns.Hide();
             butonRaspuns1.Hide();
-            int x = 70, y = 350;
+            
             labelCerinta.Text = enunt;
             butonRaspuns.Show();
             //Checkbox Variante           
             for (int i = 0; i < 4; i++)
-            {
-                labels[i] = new CheckBox();
-                labels[i].Parent = this;
-                labels[i].Size = new Size(1650, 55);
-                labels[i].Location = new Point(x, y+=70);
-                labels[i].Update();
+            { 
                 labels[i].Show();
             }
             labels[0].Text = v1;
