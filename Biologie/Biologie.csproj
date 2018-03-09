@@ -133,6 +133,7 @@
     <Compile Include="AdminTeste.Designer.cs">
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConnectionTools.cs" />
     <Compile Include="EntityFBio.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

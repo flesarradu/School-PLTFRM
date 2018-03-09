@@ -17,6 +17,8 @@ namespace Biologie
         int corecte = 0;
         int numarEnunturi = 0;
         int numarRaspunse = 0;
+        int[] raspunse = new int[100];
+        int lastID = 0;
        // Label cerinta = new Label();
         List<enunturi> Enunturi = new List<enunturi>();
         CheckBox[] labels = new CheckBox[4];
@@ -29,6 +31,11 @@ namespace Biologie
             InitializeComponent();
             test = tes;
             u = user;
+            for (int i = 0; i < 100; i++)
+            {
+                raspunse[i] = 0;
+                
+            }
             //BUTOANE
             int yx = 70, xy = 350;
             butonRaspuns1.Parent = this;
@@ -81,10 +88,10 @@ namespace Biologie
                 {
                     var q = from y in db.enunturi where y.id.Equals(x.enuntID) select y;
                     foreach (var z in q)
-                    {
+                    { 
                         Enunturi.Add(z);
-                        numarEnunturi++;
-                    }
+                        Enunturi[numarEnunturi++].raspunsa=0;
+                    }                
                 }
             }
             butonRaspuns.Click += (s, args) => {
@@ -93,16 +100,18 @@ namespace Biologie
                 {
                     if (labels[i].Checked)
                     {
-                        if (labels[i].Text.ToLower() == Enunturi[numarRaspunse - 1].raspuns.ToLower())
+                        if (labels[i].Text.ToLower() == Enunturi[lastID].raspuns.ToLower())
                         {
                             corecte++;
                             
                         }
                         labels[i].CheckState = CheckState.Unchecked;
-                            
+                        numarRaspunse++;
+                        Enunturi[lastID].raspunsa = 1;
                         if (numarRaspunse < numarEnunturi)
-                        {
-                            afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                        {   
+                            // afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                            afiseazaEnunt(getID());
                         }
                         else
                         {
@@ -122,14 +131,18 @@ namespace Biologie
             { 
                 butonRaspuns.Hide();
                 campRaspuns.Hide();
-                if (campRaspuns.Text.ToLower() == Enunturi[numarRaspunse - 1].raspuns.ToLower())
+                if (campRaspuns.Text.ToLower() == Enunturi[lastID].raspuns.ToLower())
                 {
                     corecte++;
                 }
                 campRaspuns.Text = "";
+                numarRaspunse++;
+                Enunturi[lastID].raspunsa = 1;
                 if (numarRaspunse < numarEnunturi)
                 {
-                    afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                    
+                    // afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                    afiseazaEnunt(getID());
                 }
 
                 else
@@ -142,7 +155,8 @@ namespace Biologie
                     }
                 }
             };
-            afiseazaEnunt(Enunturi[numarRaspunse++].id);
+            // afiseazaEnunt(Enunturi[numarRaspunse++].id);
+            afiseazaEnunt(getID());
             
             
         }
@@ -190,9 +204,9 @@ namespace Biologie
             {
                 var query = from x in db.rezultate select x;
                 int ID = query.Max(x => x.id);
-                db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat = (100 * corecte / numarEnunturi).ToString() });
+                db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat = (corecte * 10 + 10).ToString() });
                 db.SaveChanges();
-                MessageBox.Show("Rezultat: " + 100 * corecte / numarEnunturi + "%");
+                MessageBox.Show("Rezultat: " + (corecte*10+10) + " puncte");
             }
         }
         private void afiseazaEnunt0(string enunt, string raspuns, string v1, string v2, string v3, string v4)
@@ -212,6 +226,24 @@ namespace Biologie
             labels[1].Text = v2;
             labels[2].Text = v3;
             labels[3].Text = v4;          
+        }
+        private int getID()
+        {
+            Random rand = new Random(DateTime.Now.Millisecond);
+            int n=0;
+            
+            int[] vct = new int[100];
+            for(int i=0; i<numarEnunturi;i++)
+                if(Enunturi[i].raspunsa==0)
+                {
+                    vct[n++] = i;
+                }
+            int idNumber = 0;
+            if (n > 1)
+                idNumber = rand.Next(0, n - 1);
+         
+            lastID = vct[idNumber];
+            return Enunturi[vct[idNumber]].id;
         }
     }
 }

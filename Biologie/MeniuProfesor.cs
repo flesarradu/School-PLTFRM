@@ -57,5 +57,25 @@ namespace Biologie
             visa.FormClosed += (s, args) => Show();
             visa.Show();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Normal;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Normal|| this.WindowState == FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Minimized;
+            
+        }
     }
 }

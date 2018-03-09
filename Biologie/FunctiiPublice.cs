@@ -11,11 +11,13 @@ namespace Biologie
 {
    public class FunctiiPublice
     {
-       public bool verificaCont(string user, string password)
+        public bool verificaCont(string user, string password)
         {
+
             using (var db = new EntityFBio())
-            {              
-                   if (db.accounts.Any(s => (s.password == password) && (s.user == user)))
+            {
+                
+                if (db.accounts.Any(s => (s.password == password) && (s.user == user)))
                         return true;
                     else
                         return false;       
@@ -164,7 +166,7 @@ namespace Biologie
                     return false;
             }
         }
-
+                
         public void schimbaParola(string user, string password)
         {
             using (var db = new EntityFBio())

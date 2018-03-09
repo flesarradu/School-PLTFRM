@@ -9,6 +9,7 @@ namespace Biologie
     class Test
     {
         public int enuntID { get; set; }
+        public int raspuns { get; set; }
     }
     
 }
