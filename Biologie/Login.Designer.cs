@@ -41,8 +41,8 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -152,7 +152,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 31F, System.Drawing.FontStyle.Bold);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(209)))), ((int)(((byte)(175)))));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label4.Location = new System.Drawing.Point(296, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 52);
@@ -244,15 +244,6 @@
             this.tableLayoutPanel1.TabIndex = 16;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint_1);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(121)))), ((int)(((byte)(96)))));
-            this.panel2.Location = new System.Drawing.Point(0, 93);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0, 7, 3, 7);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(10, 31);
-            this.panel2.TabIndex = 15;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(121)))), ((int)(((byte)(96)))));
@@ -261,6 +252,15 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 31);
             this.panel3.TabIndex = 16;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(121)))), ((int)(((byte)(96)))));
+            this.panel2.Location = new System.Drawing.Point(0, 93);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0, 7, 3, 7);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(10, 31);
+            this.panel2.TabIndex = 15;
             // 
             // Login
             // 
@@ -273,9 +273,9 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Adobe Fan Heiti Std B", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "Login";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Login_Load);

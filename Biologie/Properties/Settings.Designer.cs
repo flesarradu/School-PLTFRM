@@ -33,5 +33,16 @@ namespace Biologie.Properties {
                 return ((string)(this["Database_EFBioConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sql6004.site4now.net;Initial Catalog=DB_A36E0C_flesarradu;Persist Sec" +
+            "urity Info=True;User ID=DB_A36E0C_flesarradu_admin;Password=Biologie1234")]
+        public string DB_A36E0C_flesarraduConnectionString {
+            get {
+                return ((string)(this["DB_A36E0C_flesarraduConnectionString"]));
+            }
+        }
     }
 }

@@ -13,7 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\flesa\Desktop\AppBiologie\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -23,10 +24,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -61,6 +63,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>EF4DA3EE29511FB5A54DDFBB865673036C137525</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Biologie_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -134,6 +142,11 @@
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionTools.cs" />
+    <Compile Include="DB_A36E0C_flesarraduDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB_A36E0C_flesarraduDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EntityFBio.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -242,11 +255,23 @@
     <EmbeddedResource Include="VizualizareRezultate.resx">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.Config" />
     <EntityDeploy Include="EntityFBio.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="Biologie_TemporaryKey.pfx" />
+    <None Include="DB_A36E0C_flesarraduDataSet.xsc">
+      <DependentUpon>DB_A36E0C_flesarraduDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DB_A36E0C_flesarraduDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DB_A36E0C_flesarraduDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DB_A36E0C_flesarraduDataSet.xss">
+      <DependentUpon>DB_A36E0C_flesarraduDataSet.xsd</DependentUpon>
+    </None>
     <None Include="EntityFBio.edmx.diagram">
       <DependentUpon>EntityFBio.edmx</DependentUpon>
     </None>

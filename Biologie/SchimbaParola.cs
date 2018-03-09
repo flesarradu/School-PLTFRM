@@ -36,5 +36,10 @@ namespace Biologie
             else
                 MessageBox.Show("Parola este incorecta!");
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

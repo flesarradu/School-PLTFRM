@@ -14,8 +14,6 @@ namespace Biologie
     
     public partial class enunturi
     {
-        
-
         public int id { get; set; }
         public int dificultate { get; set; }
         public string enunt { get; set; }
