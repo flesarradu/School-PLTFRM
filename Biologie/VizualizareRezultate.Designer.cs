@@ -43,12 +43,15 @@
             this.rezultateTableAdapter = new Biologie._Database_EFBioDataSetTableAdapters.rezultateTableAdapter();
             this.rezultateTableAdapter1 = new Biologie.DB_A36E0C_flesarraduDataSetTableAdapters.rezultateTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rezultateBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dB_A36E0C_flesarraduDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rezultateBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._Database_EFBioDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.testeBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -138,11 +141,39 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label8);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(925, 34);
             this.panel1.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Montserrat", 20F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
+            this.label8.Location = new System.Drawing.Point(880, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(33, 33);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "X";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Montserrat", 20F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
+            this.label1.Location = new System.Drawing.Point(284, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(365, 33);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "VIZUALIZARE REZULTATE";
             // 
             // VizualizareRezultate
             // 
@@ -165,6 +196,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.rezultateBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._Database_EFBioDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.testeBindingSource)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -184,5 +217,7 @@
         private System.Windows.Forms.BindingSource rezultateBindingSource1;
         private DB_A36E0C_flesarraduDataSetTableAdapters.rezultateTableAdapter rezultateTableAdapter1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label8;
     }
 }

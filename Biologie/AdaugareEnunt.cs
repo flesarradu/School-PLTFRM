@@ -38,7 +38,7 @@ namespace Biologie
         {
             try
             {
-                int x = 15, y = 560, w = 42, h = 25;
+                int x = 95, y = 560, w = 42, h = 25;
                 trackBar1.Show();
                 label4.Show();
                 if (comboBox1.SelectedItem.ToString() == "0")
@@ -50,12 +50,11 @@ namespace Biologie
                         labels[i].Location = new Point(x, y += 30);
                         labels[i].Size = new Size(w, h);
                         labels[i].Text = subPCT++ + ")";
-                        
+                        labels[i].Font = comboBox1.Font; 
                         labels[i].Update();
-                        
                         labels[i].Parent = this;
                         labels[i].Anchor = AnchorStyles.Top;
-                        
+                        labels[i].ForeColor = comboBox1.ForeColor;
                         labels[i].Show();
                         
                         this.Controls.Add(labels[i]);
@@ -64,7 +63,10 @@ namespace Biologie
                         textBoxs[i].Size = new Size(290, 33);
                         textBoxs[i].Update();
                         textBoxs[i].Parent = this;
+                        textBoxs[i].Font = new Font(comboBox1.Font, FontStyle.Regular);
                         textBoxs[i].Update();
+                        textBoxs[i].ForeColor = comboBox1.ForeColor;
+                        textBoxs[i].Anchor = AnchorStyles.Top;
                         textBoxs[i].Show();
                         
                         //CheckBoxes
@@ -72,6 +74,9 @@ namespace Biologie
                         checkBoxs[i].Size = new Size(137, 29);
                         checkBoxs[i].Parent = this;
                         checkBoxs[i].Text = "Corect";
+                        checkBoxs[i].Anchor = AnchorStyles.Top;
+                        checkBoxs[i].Font = comboBox1.Font;
+                        checkBoxs[i].ForeColor = comboBox1.ForeColor;
                         checkBoxs[i].Update();
                         checkBoxs[i].Show();
                     }
@@ -88,11 +93,15 @@ namespace Biologie
                     labels[1].Parent = this;
                     labels[1].Size = new Size(100, h);
                     labels[1].Text = "Rezultat";
+                    labels[1].Anchor = AnchorStyles.Top;
+                    labels[1].ForeColor = comboBox1.ForeColor;
                     labels[1].Update();
                     labels[1].Show();
                     textBoxs[1].Location = new Point(x + 100, y + 30);
                     textBoxs[1].Size = new Size(290, 33);
+                    textBoxs[1].Anchor = AnchorStyles.Top;
                     textBoxs[1].Update();
+                    textBoxs[1].ForeColor = comboBox1.ForeColor;
                     textBoxs[1].Parent = this;
                     textBoxs[1].Update();
                     textBoxs[1].Show();
@@ -102,6 +111,9 @@ namespace Biologie
                 adaugaEnunt.Size = new Size(174, 63);
                 adaugaEnunt.Parent = this;
                 adaugaEnunt.Text = "Adauga Enunt";
+                adaugaEnunt.ForeColor = comboBox1.ForeColor;
+                adaugaEnunt.Font = comboBox1.Font;
+                adaugaEnunt.Anchor = AnchorStyles.Top;
                 adaugaEnunt.Update();
                 adaugaEnunt.Show();
                 adaugaEnunt.Click += (s, args) =>
@@ -144,6 +156,20 @@ namespace Biologie
         private void label8_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Normal;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Minimized;
         }
     }
 }

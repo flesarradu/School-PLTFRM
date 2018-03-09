@@ -33,6 +33,10 @@ namespace Biologie
             login.adaugaCont(username, parola, admin, clasa);
             Close();
         }
-       
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -53,6 +53,11 @@ namespace Biologie
             adaugare.Parent = this;
             adaugare.Text = text;
             adaugare.Size = new System.Drawing.Size(w, h);
+            tableLayoutPanel2.Controls.Add(adaugare, 3, 0);
+            adaugare.Font = comboBox1.Font;
+            adaugare.ForeColor = comboBox1.ForeColor;
+            adaugare.Anchor = AnchorStyles.Left;
+            
             adaugare.Name = "adaugare";
             adaugare.Click += (s, e) =>
             {
@@ -151,6 +156,25 @@ namespace Biologie
                     }
                 db.SaveChanges();
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Minimized)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Normal;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -51,12 +51,14 @@
             // comboBox1
             // 
             this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.comboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(209)))), ((int)(((byte)(175)))));
+            this.comboBox1.Font = new System.Drawing.Font("Montserrat", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(262, 37);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(171, 33);
+            this.comboBox1.Size = new System.Drawing.Size(171, 32);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -89,7 +91,9 @@
             // textBox1
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(209)))), ((int)(((byte)(175)))));
+            this.textBox1.Font = new System.Drawing.Font("Montserrat", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.textBox1.Location = new System.Drawing.Point(262, 113);
             this.textBox1.Margin = new System.Windows.Forms.Padding(6);
             this.textBox1.Multiline = true;
@@ -153,6 +157,7 @@
             this.label5.Size = new System.Drawing.Size(51, 49);
             this.label5.TabIndex = 3;
             this.label5.Text = "_";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -165,6 +170,7 @@
             this.label6.Size = new System.Drawing.Size(56, 49);
             this.label6.TabIndex = 2;
             this.label6.Text = "O";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
