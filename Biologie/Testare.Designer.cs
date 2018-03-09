@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Testare));
             this.labelCerinta = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             this.ClientSize = new System.Drawing.Size(1804, 941);
             this.Controls.Add(this.labelCerinta);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 35.25F);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(14, 12, 14, 12);
             this.Name = "Testare";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

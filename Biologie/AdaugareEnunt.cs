@@ -38,7 +38,7 @@ namespace Biologie
         {
             try
             {
-                int x = 15, y = 360, w = 42, h = 25;
+                int x = 15, y = 560, w = 42, h = 25;
                 trackBar1.Show();
                 label4.Show();
                 if (comboBox1.SelectedItem.ToString() == "0")
@@ -50,9 +50,14 @@ namespace Biologie
                         labels[i].Location = new Point(x, y += 30);
                         labels[i].Size = new Size(w, h);
                         labels[i].Text = subPCT++ + ")";
+                        
                         labels[i].Update();
+                        
                         labels[i].Parent = this;
+                        labels[i].Anchor = AnchorStyles.Top;
+                        
                         labels[i].Show();
+                        
                         this.Controls.Add(labels[i]);
                         //TextBoxes
                         textBoxs[i].Location = new Point(x + 50, y);
@@ -61,6 +66,7 @@ namespace Biologie
                         textBoxs[i].Parent = this;
                         textBoxs[i].Update();
                         textBoxs[i].Show();
+                        
                         //CheckBoxes
                         checkBoxs[i].Location = new Point(x + 350, y);
                         checkBoxs[i].Size = new Size(137, 29);
@@ -133,6 +139,11 @@ namespace Biologie
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             label3.Text = trackBar1.Value.ToString();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
