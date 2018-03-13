@@ -35,7 +35,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -123,15 +122,6 @@
             this.label4.Size = new System.Drawing.Size(155, 33);
             this.label4.TabIndex = 6;
             this.label4.Text = "Dificultate";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1426, 735);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 25);
-            this.label3.TabIndex = 5;
             // 
             // panel1
             // 
@@ -236,7 +226,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label3);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -250,7 +239,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -262,7 +250,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;

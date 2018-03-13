@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Diagnostics;
 namespace Biologie
@@ -19,15 +20,17 @@ namespace Biologie
         int numarRaspunse = 0;
         int[] raspunse = new int[100];
         int lastID = 0;
+        int abandon = 0;
        // Label cerinta = new Label();
         List<enunturi> Enunturi = new List<enunturi>();
         CheckBox[] labels = new CheckBox[4];
         TextBox campRaspuns = new TextBox();
         Button butonRaspuns = new Button();
         Button butonRaspuns1 = new Button();
-       
+      
         public Testare(string user, string tes)
-        {
+       {    
+            
             InitializeComponent();
             test = tes;
             u = user;
@@ -41,31 +44,57 @@ namespace Biologie
             butonRaspuns1.Parent = this;
             butonRaspuns1.Location = new Point(1463, 801);
             butonRaspuns1.Size = new Size(250, 65);
+            butonRaspuns1.Anchor = AnchorStyles.Right;
+            butonRaspuns1.Font = labelCerinta.Font;
+            butonRaspuns1.Font = new Font(butonRaspuns1.Font.FontFamily, 20);
             butonRaspuns1.Text = "Raspunde";
-            butonRaspuns1.Update();
+            butonRaspuns1.ForeColor = Color.FromArgb(250, 242, 200);
             campRaspuns.Parent = this;
             campRaspuns.Text = "";
             campRaspuns.Location = new Point(25, 400);
+            campRaspuns.Anchor = AnchorStyles.Left;
+            campRaspuns.Font = labelCerinta.Font;
+            campRaspuns.Font = new Font(campRaspuns.Font.FontFamily, 20);
             campRaspuns.Size = new Size(470, 61);
-            campRaspuns.Update();
+            campRaspuns.BackColor = Color.FromArgb(199, 209, 175);
+            campRaspuns.ForeColor = Color.FromArgb(245, 142, 107);
             butonRaspuns.Parent = this;
             butonRaspuns.Location = new Point(1463, 801);
             butonRaspuns.Size = new Size(250, 65);
+            butonRaspuns.Anchor = AnchorStyles.Right;
+            butonRaspuns1.Font = labelCerinta.Font;
+            butonRaspuns1.Font = new Font(butonRaspuns1.Font.FontFamily, 20);
             butonRaspuns.Text = "Raspunde";
+            butonRaspuns.ForeColor = butonRaspuns1.ForeColor;
+            var margin = butonRaspuns1.Margin;
+            margin.Left = 50;
+            margin.Right = 50;
+            
+            butonRaspuns.ForeColor = Color.FromArgb(245, 142, 107);
+          
+            butonRaspuns1.ForeColor = Color.FromArgb(245, 142, 107);
+            butonRaspuns1.Margin = margin;
+            butonRaspuns.Margin = margin;
+            campRaspuns.Margin = margin;
+            campRaspuns.Update();
             butonRaspuns.Update();
-            for(int i=0;i<4;i++)
+            butonRaspuns1.Update();
+            for (int i=0;i<4;i++)
             {
                 labels[i] = new CheckBox();
                 labels[i].Parent = this;
                 labels[i].Size = new Size(1650, 55);
                 labels[i].Location = new Point(yx, xy += 70);
+                tableLayoutPanel1.Controls.Add(labels[i], 0, i+1);
+                labels[i].Anchor = AnchorStyles.Left;
+                labels[i].Margin = margin;
                 labels[i].Update();
             }
 
-            // WindowState = FormWindowState.Normal;
-            // FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            // Bounds = Screen.PrimaryScreen.Bounds;
-            //Activate();
+             WindowState = FormWindowState.Normal;
+             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+             Bounds = Screen.PrimaryScreen.Bounds;
+             Activate();
             List<Test> enunturiTest = new List<Test>();
             using (var db = new EntityFBio())
             {   
@@ -181,16 +210,18 @@ namespace Biologie
         
         private void afiseazaEnunt1(string enunt, string raspuns)
         {
+            tableLayoutPanel1.Controls.Remove(butonRaspuns);
             butonRaspuns.Hide();
+            tableLayoutPanel1.Controls.Add(butonRaspuns1, 0, 5);
             for (int i=0;i<4;i++)
             {
                 labels[i].Hide();
             }
             labelCerinta.Text = enunt;
-            
+            tableLayoutPanel1.Controls.Remove(labels[1]);
             //Camp de Raspuns
- 
-       
+
+            tableLayoutPanel1.Controls.Add(campRaspuns, 0, 2);
             campRaspuns.Show();
 
             //Buton raspuns
@@ -204,17 +235,23 @@ namespace Biologie
             {
                 var query = from x in db.rezultate select x;
                 int ID = query.Max(x => x.id);
-                db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat = (corecte * 10 + 10).ToString() });
+                double punctaj = 90.0/numarEnunturi;
+                double rezultatul = punctaj * numarRaspunse + 10;
+                rezultatul = Math.Round(rezultatul, 2);
+                db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat=rezultatul.ToString()  });
                 db.SaveChanges();
-                MessageBox.Show("Rezultat: " + (corecte*10+10) + " puncte");
+                MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }
+            abandon = 1;
         }
         private void afiseazaEnunt0(string enunt, string raspuns, string v1, string v2, string v3, string v4)
         {
-
+            tableLayoutPanel1.Controls.Remove(campRaspuns);
             campRaspuns.Hide();
+            tableLayoutPanel1.Controls.Remove(butonRaspuns1);
             butonRaspuns1.Hide();
-            
+            tableLayoutPanel1.Controls.Add(butonRaspuns, 0, 5);
+            tableLayoutPanel1.Controls.Add(labels[1], 0, 2);
             labelCerinta.Text = enunt;
             butonRaspuns.Show();
             //Checkbox Variante           
@@ -244,6 +281,23 @@ namespace Biologie
          
             lastID = vct[idNumber];
             return Enunturi[vct[idNumber]].id;
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Doriti sa abandonati testul? \nRezultatul se va inregistra in server!", "Confirmare", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                finalizareTest();
+                Application.Exit();
+            }
+           
+        }
+
+        private void Testare_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (abandon == 0)
+                finalizareTest();            
         }
     }
 }

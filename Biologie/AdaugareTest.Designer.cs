@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,7 +58,7 @@
             this.comboBox1.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(121, 13);
+            this.comboBox1.Location = new System.Drawing.Point(137, 21);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(10, 6, 6, 6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(155, 37);
@@ -77,7 +78,7 @@
             this.checkedListBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.checkedListBox1.Location = new System.Drawing.Point(3, 3);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(1110, 450);
+            this.checkedListBox1.Size = new System.Drawing.Size(1274, 526);
             this.checkedListBox1.TabIndex = 1;
             // 
             // button1
@@ -85,7 +86,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
-            this.button1.Location = new System.Drawing.Point(976, 463);
+            this.button1.Location = new System.Drawing.Point(1140, 539);
             this.button1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 36);
@@ -100,7 +101,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
-            this.label1.Location = new System.Drawing.Point(44, 17);
+            this.label1.Location = new System.Drawing.Point(60, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 29);
             this.label1.TabIndex = 3;
@@ -115,14 +116,15 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.panel4);
             this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel2);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1116, 627);
-            this.splitContainer1.SplitterDistance = 116;
+            this.splitContainer1.Size = new System.Drawing.Size(1280, 720);
+            this.splitContainer1.SplitterDistance = 133;
             this.splitContainer1.TabIndex = 4;
             // 
             // tableLayoutPanel2
@@ -138,7 +140,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1116, 63);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1280, 80);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
             // panel1
@@ -151,7 +153,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1116, 53);
+            this.panel1.Size = new System.Drawing.Size(1280, 53);
             this.panel1.TabIndex = 4;
             // 
             // label4
@@ -160,7 +162,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 17.25F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
-            this.label4.Location = new System.Drawing.Point(1004, 12);
+            this.label4.Location = new System.Drawing.Point(1168, 12);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 28);
             this.label4.TabIndex = 18;
@@ -173,7 +175,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Montserrat", 17.25F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
-            this.label3.Location = new System.Drawing.Point(1039, 12);
+            this.label3.Location = new System.Drawing.Point(1203, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 28);
             this.label3.TabIndex = 17;
@@ -187,7 +189,7 @@
             this.label2.Font = new System.Drawing.Font("Montserrat", 17.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(444, 12);
+            this.label2.Location = new System.Drawing.Point(526, 12);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 40, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(211, 28);
@@ -201,7 +203,7 @@
             this.label5.Font = new System.Drawing.Font("Montserrat", 17.25F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label5.Location = new System.Drawing.Point(1076, 12);
+            this.label5.Location = new System.Drawing.Point(1240, 12);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 40, 3, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(28, 28);
@@ -221,15 +223,24 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1116, 507);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 583);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(177)))), ((int)(((byte)(53)))), ((int)(((byte)(12)))));
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 53);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1280, 10);
+            this.panel4.TabIndex = 17;
             // 
             // AdaugareTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
-            this.ClientSize = new System.Drawing.Size(1116, 627);
+            this.ClientSize = new System.Drawing.Size(1280, 720);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -265,5 +276,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel4;
     }
 }

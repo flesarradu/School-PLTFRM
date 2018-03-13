@@ -150,7 +150,8 @@ namespace Biologie
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            label3.Text = trackBar1.Value.ToString();
+            
+            label4.Text = "Dificultate" + "[" + trackBar1.Value.ToString() + "] "; 
         }
 
         private void label8_Click(object sender, EventArgs e)
