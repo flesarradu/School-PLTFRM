@@ -238,7 +238,7 @@ namespace Biologie
                 var query = from x in db.rezultate select x;
                 int ID = query.Max(x => x.id);
                 double punctaj = 90.0/numarEnunturi;
-                double rezultatul = punctaj * corecte + 10;
+                double rezultatul = punctaj * numarRaspunse + 10;
                 rezultatul = Math.Round(rezultatul, 2);
                 db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat=rezultatul.ToString()  });
                 db.SaveChanges();
