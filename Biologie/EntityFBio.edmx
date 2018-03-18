@@ -5,160 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EntityFBioNamespace.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="accounts">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="password" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="admin" Type="int" />
-          <Property Name="clasa" Type="char" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="enunturi">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dificultate" Type="int" Nullable="false" />
-          <Property Name="enunt" Type="nvarchar" MaxLength="2000" Nullable="false" />
-          <Property Name="tip" Type="int" Nullable="false" />
-          <Property Name="raspuns" Type="nvarchar" MaxLength="2000" Nullable="false" />
-          <Property Name="varianta1" Type="nvarchar" MaxLength="2000" />
-          <Property Name="varianta2" Type="nvarchar" MaxLength="2000" />
-          <Property Name="varianta3" Type="nvarchar" MaxLength="2000" />
-          <Property Name="varianta4" Type="nvarchar" MaxLength="2000" />
-        </EntityType>
-        <EntityType Name="rezultate">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="user" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="rezultat" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="test" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="teste">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nume" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="clasa" Type="nchar" MaxLength="10" />
-          <Property Name="enunturi" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <EntityContainer Name="EntityFBioNamespaceStoreContainer">
-          <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="enunturi" EntityType="Self.enunturi" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="rezultate" EntityType="Self.rezultate" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="teste" EntityType="Self.teste" Schema="dbo" store:Type="Tables" />
-        </EntityContainer>
+          </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EntityFBioNamespace" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="accounts">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="admin" Type="Int32" />
-          <Property Name="clasa" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-        </EntityType>
-        <EntityType Name="enunturi">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dificultate" Type="Int32" Nullable="false" />
-          <Property Name="enunt" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tip" Type="Int32" Nullable="false" />
-          <Property Name="raspuns" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="varianta1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="varianta2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="varianta3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="varianta4" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="rezultate">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="rezultat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="test" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="teste">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="clasa" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="enunturi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="EntityFBio" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="accounts" EntityType="Self.accounts" />
-          <EntitySet Name="enunturi" EntityType="Self.enunturi" />
-          <EntitySet Name="rezultate" EntityType="Self.rezultate" />
-          <EntitySet Name="teste" EntityType="Self.teste" />
-        </EntityContainer>
+          </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EntityFBioNamespaceStoreContainer" CdmEntityContainer="EntityFBio">
-          <EntitySetMapping Name="accounts">
-            <EntityTypeMapping TypeName="EntityFBioNamespace.accounts">
-              <MappingFragment StoreEntitySet="accounts">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user" ColumnName="user" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="admin" ColumnName="admin" />
-                <ScalarProperty Name="clasa" ColumnName="clasa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="enunturi">
-            <EntityTypeMapping TypeName="EntityFBioNamespace.enunturi">
-              <MappingFragment StoreEntitySet="enunturi">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="dificultate" ColumnName="dificultate" />
-                <ScalarProperty Name="enunt" ColumnName="enunt" />
-                <ScalarProperty Name="tip" ColumnName="tip" />
-                <ScalarProperty Name="raspuns" ColumnName="raspuns" />
-                <ScalarProperty Name="varianta1" ColumnName="varianta1" />
-                <ScalarProperty Name="varianta2" ColumnName="varianta2" />
-                <ScalarProperty Name="varianta3" ColumnName="varianta3" />
-                <ScalarProperty Name="varianta4" ColumnName="varianta4" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="rezultate">
-            <EntityTypeMapping TypeName="EntityFBioNamespace.rezultate">
-              <MappingFragment StoreEntitySet="rezultate">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="user" ColumnName="user" />
-                <ScalarProperty Name="rezultat" ColumnName="rezultat" />
-                <ScalarProperty Name="test" ColumnName="test" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="teste">
-            <EntityTypeMapping TypeName="EntityFBioNamespace.teste">
-              <MappingFragment StoreEntitySet="teste">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nume" ColumnName="nume" />
-                <ScalarProperty Name="clasa" ColumnName="clasa" />
-                <ScalarProperty Name="enunturi" ColumnName="enunturi" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

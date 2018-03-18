@@ -5,11 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="de18016a254947898a4d87c13bf0b1c4" Name="Diagram1">
-        <EntityTypeShape EntityType="EntityFBioNamespace.accounts" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBioNamespace.enunturi" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBioNamespace.rezultate" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBioNamespace.teste" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

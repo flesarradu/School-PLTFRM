@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Diagnostics;
+
+
 namespace Biologie
 {
     public partial class Testare : Form
@@ -95,7 +97,7 @@ namespace Biologie
              FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
              Bounds = Screen.PrimaryScreen.Bounds;
              Activate();
-            List<Test> enunturiTest = new List<Test>();
+            List<DataContracts.SqlModels.Test> enunturiTest = new List<DataContracts.SqlModels.Test>();
             using (var db = new EntityFBio())
             {   
                 string enunturi = "";
@@ -110,17 +112,17 @@ namespace Biologie
                 foreach (string s in words)
                 {
                     if (s != "")
-                        enunturiTest.Add(new Test() { enuntID = int.Parse(s) });
+                        enunturiTest.Add(new DataContracts.SqlModels.Test() { Id = Guid.NewGuid() });
                 }
 
                 foreach (var x in enunturiTest)
                 {
-                    var q = from y in db.enunturi where y.id.Equals(x.enuntID) select y;
-                    foreach (var z in q)
-                    { 
-                        Enunturi.Add(z);
-                        Enunturi[numarEnunturi++].raspunsa=0;
-                    }                
+                   // var q = from y in db.enunturi where y.id.Equals(x.enuntID) select y;
+                  //  foreach (var z in q)
+                  //  { 
+                 //       Enunturi.Add(z);
+                 //       Enunturi[numarEnunturi++].raspunsa=0;
+                 //   }                
                 }
             }
             butonRaspuns.Click += (s, args) => {

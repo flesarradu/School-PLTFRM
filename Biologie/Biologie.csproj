@@ -14,7 +14,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\flesa\Desktop\AppBiologie\New\New02\</PublishUrl>
+    <PublishUrl>C:\Users\flesa\Desktop\AppBiologie\New\New03\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -113,9 +113,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="accounts.cs">
-      <DependentUpon>EntityFBio.tt</DependentUpon>
-    </Compile>
     <Compile Include="AdaugareElev.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +138,13 @@
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionTools.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="DataContracts\SqlModels\Clasa.cs" />
+    <Compile Include="DataContracts\SqlModels\Intrebare.cs" />
+    <Compile Include="DataContracts\SqlModels\Nota.cs" />
+    <Compile Include="DataContracts\SqlModels\Raspuns.cs" />
+    <Compile Include="DataContracts\SqlModels\Test.cs" />
+    <Compile Include="DataContracts\SqlModels\User.cs" />
     <Compile Include="DB_A36E0C_flesarraduDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,9 +164,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFBio.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="enunturi.cs">
-      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="FunctiiPublice.cs" />
     <Compile Include="Login.cs">
@@ -184,24 +185,17 @@
       <DependentUpon>MeniuProfesor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="rezultate.cs">
-      <DependentUpon>EntityFBio.tt</DependentUpon>
-    </Compile>
     <Compile Include="SchimbaParola.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SchimbaParola.Designer.cs">
       <DependentUpon>SchimbaParola.cs</DependentUpon>
     </Compile>
-    <Compile Include="Test.cs" />
     <Compile Include="Testare.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Testare.Designer.cs">
       <DependentUpon>Testare.cs</DependentUpon>
-    </Compile>
-    <Compile Include="teste.cs">
-      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="VizualizareRezultate.cs">
       <SubType>Form</SubType>

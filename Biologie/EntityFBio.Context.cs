@@ -25,9 +25,5 @@ namespace Biologie
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<accounts> accounts { get; set; }
-        public virtual DbSet<enunturi> enunturi { get; set; }
-        public virtual DbSet<rezultate> rezultate { get; set; }
-        public virtual DbSet<teste> teste { get; set; }
     }
 }
