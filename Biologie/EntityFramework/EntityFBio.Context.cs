@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Biologie
+namespace Biologie.EntityFramework
 {
     using System;
     using System.Data.Entity;
@@ -25,5 +25,11 @@ namespace Biologie
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Result> Results { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
     }
 }

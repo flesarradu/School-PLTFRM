@@ -8,8 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
-using System.Data.EntityClient;
-
 
 
 namespace Biologie
@@ -19,7 +17,7 @@ namespace Biologie
         public Login()
         {
             InitializeComponent();
-
+            
         }
         private void button1_Click_1(object sender, EventArgs e)
         {

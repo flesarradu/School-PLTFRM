@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Diagnostics;
-
+using Biologie.DataContracts.SqlModels;
 
 namespace Biologie
 {
@@ -23,8 +23,8 @@ namespace Biologie
         int[] raspunse = new int[100];
         int lastID = 0;
         int abandon = 0;
-       // Label cerinta = new Label();
-        List<enunturi> Enunturi = new List<enunturi>();
+        // Label cerinta = new Label();
+        Test Test = new Test();
         CheckBox[] labels = new CheckBox[4];
         TextBox campRaspuns = new TextBox();
         Button butonRaspuns = new Button();
@@ -97,32 +97,32 @@ namespace Biologie
              FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
              Bounds = Screen.PrimaryScreen.Bounds;
              Activate();
-            List<DataContracts.SqlModels.Test> enunturiTest = new List<DataContracts.SqlModels.Test>();
+            List<Test1> enunturiTest = new List<Test1>();
             using (var db = new EntityFBio())
             {   
                 string enunturi = "";
-                var query = from y in db.teste select y;
+                var query = from y in db.Teste select y;
                 foreach (var y in query)
                 {
-                    if (y.nume == tes)
-                        enunturi = y.enunturi;
+                    //if (y.Nume == tes)
+                    //    enunturi = y.enunturii;
                 }
                 char[] delimiterChar = { ',', ' ' };
                 string[] words = enunturi.Split(delimiterChar);
                 foreach (string s in words)
                 {
                     if (s != "")
-                        enunturiTest.Add(new DataContracts.SqlModels.Test() { Id = Guid.NewGuid() });
+                        enunturiTest.Add(new Test1() { enuntID = int.Parse(s) });
                 }
 
                 foreach (var x in enunturiTest)
                 {
-                   // var q = from y in db.enunturi where y.id.Equals(x.enuntID) select y;
-                  //  foreach (var z in q)
-                  //  { 
-                 //       Enunturi.Add(z);
-                 //       Enunturi[numarEnunturi++].raspunsa=0;
-                 //   }                
+                    var q = from y in db.Intrebari where y.Id.Equals(x.enuntID) select y;
+                    foreach (var z in q)
+                    {
+                        //enunturi.Add(z);
+                        //enunturi[numarEnunturi++].raspunsa=0;
+                    }                
                 }
             }
             butonRaspuns.Click += (s, args) => {
@@ -131,14 +131,14 @@ namespace Biologie
                 {
                     if (labels[i].Checked)
                     {
-                        if (labels[i].Text.ToLower() == Enunturi[lastID].raspuns.ToLower())
-                        {
-                            corecte++;
+                        //if (labels[i].Text.ToLower() == enunturi[lastID].raspuns.ToLower())
+                        //{
+                        //    corecte++;
                             
-                        }
+                        //}
                         labels[i].CheckState = CheckState.Unchecked;
                         numarRaspunse++;
-                        Enunturi[lastID].raspunsa = 1;
+                        //Enunturi[lastID].raspunsa = 1;
                         if (numarRaspunse < numarEnunturi)
                         {   
                             // afiseazaEnunt(Enunturi[numarRaspunse++].id);
@@ -162,13 +162,13 @@ namespace Biologie
             { 
                 butonRaspuns.Hide();
                 campRaspuns.Hide();
-                if (campRaspuns.Text.ToLower() == Enunturi[lastID].raspuns.ToLower())
-                {
-                    corecte++;
-                }
+                //if (campRaspuns.Text.ToLower() == Enunturi[lastID].raspuns.ToLower())
+                //{
+                //    corecte++;
+                //}
                 campRaspuns.Text = "";
                 numarRaspunse++;
-                Enunturi[lastID].raspunsa = 1;
+                //Enunturi[lastID].raspunsa = 1;
                 if (numarRaspunse < numarEnunturi)
                 {
                     
@@ -198,16 +198,16 @@ namespace Biologie
         }
         private void afiseazaEnunt(int id)
         {
-            foreach(var x in Enunturi)
-            {
-                if(x.id == id)
-                {
-                    if (x.tip == 1)
-                        afiseazaEnunt1(x.enunt, x.raspuns);
-                    else if (x.tip == 0)
-                        afiseazaEnunt0(x.enunt, x.raspuns, x.varianta1, x.varianta2, x.varianta3, x.varianta4);
-                }
-            }
+            //foreach(var x in Enunturi)
+            //{
+            //    if(x.id == id)
+            //    {
+            //        if (x.tip == 1)
+            //            afiseazaEnunt1(x.enunt, x.raspuns);
+            //        else if (x.tip == 0)
+            //            afiseazaEnunt0(x.enunt, x.raspuns, x.varianta1, x.varianta2, x.varianta3, x.varianta4);
+            //    }
+            //}
         }
         
         private void afiseazaEnunt1(string enunt, string raspuns)
@@ -235,14 +235,14 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = from x in db.rezultate select x;
-                int ID = query.Max(x => x.id);
-                double punctaj = 90.0/numarEnunturi;
-                double rezultatul = punctaj * numarRaspunse + 10;
-                rezultatul = Math.Round(rezultatul, 2);
-                db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat=rezultatul.ToString()  });
-                db.SaveChanges();
-                MessageBox.Show("Rezultat: " + rezultatul + " puncte");
+                //var query = from x in db.rezultate select x;
+                //int ID = query.Max(x => x.id);
+                //double punctaj = 90.0/numarEnunturi;
+                //double rezultatul = punctaj * corecte + 10;
+                //rezultatul = Math.Round(rezultatul, 2);
+                //db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat=rezultatul.ToString()  });
+                //db.SaveChanges();
+                //MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }
             abandon = 1;
         }
@@ -272,17 +272,18 @@ namespace Biologie
             int n=0;
             
             int[] vct = new int[100];
-            for(int i=0; i<numarEnunturi;i++)
-                if(Enunturi[i].raspunsa==0)
-                {
-                    vct[n++] = i;
-                }
+            //for(int i=0; i<numarEnunturi;i++)
+                //if(Enunturi[i].raspunsa==0)
+                //{
+                //    vct[n++] = i;
+                //}
             int idNumber = 0;
             if (n > 1)
                 idNumber = rand.Next(0, n - 1);
          
             lastID = vct[idNumber];
-            return Enunturi[vct[idNumber]].id;
+            //return Enunturi[vct[idNumber]].id;
+            return 0;
         }
 
         private void label4_Click(object sender, EventArgs e)

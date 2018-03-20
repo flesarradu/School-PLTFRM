@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Biologie.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,10 +29,10 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = from x in db.enunturi select x;
+                var query = from x in db.Questions select x;
                 foreach (var x in query)
                 {
-                    checkedListBox1.Items.Add(x.id + "\t" + x.dificultate + " \t       " + x.enunt);
+                    checkedListBox1.Items.Add(x.Id + "\t" + x.Level + " \t       " + x.QuestionText);
                 }
             }
 
@@ -71,10 +73,10 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = from x in db.teste select x;
+                var query = from x in db.Tests select x;
                 foreach (var x in query)
                 {
-                    comboBox1.Items.Add(x.nume);
+                    comboBox1.Items.Add(x.Name);
                 }
             }
             comboBox1.Items.Add("Test Nou");
@@ -84,10 +86,9 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = db.teste.Where(x => x.nume == comboBox1.SelectedItem.ToString());
-                string enunturiExistente = "";
+                var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());      
                 foreach (var x in query)
-                    if (x.enunturi == "" || x.enunturi == null)
+                   if (x.Questions.Count==0)
                     {                     
                         for (int i = 0; i < checkedListBox1.Items.Count; i++)
                         {
@@ -95,45 +96,46 @@ namespace Biologie
                             {
                                 char delimiter = '\t';
                                 string[] words = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                if (i + 1 == checkedListBox1.Items.Count)
-                                    x.enunturi += words[0];
-                                else
-                                    x.enunturi += words[0] + ",";
-                                
+                                Question enunt = new Question();
+                                var en = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(words[0]));
+                                enunt = en;
+                                x.Questions.Add(enunt);                           
                             }
                         }
-                        MessageBox.Show("Au fost adaugate enunturile cu id:" + x.enunturi);
+                        MessageBox.Show("Au fost adaugate enunturile in baza de date.");
                     }
                     else
                     {
-                        string enunturile = x.enunturi;
+                        string enunturile = "";
+                        foreach(var xy in x.Questions)
+                        {
+                            enunturile += xy.QuestionText + ", ";
+                        }  
+                        string enunturiExistente = "";
                         char[] delimiterChar = { ',', ' ' };
                         string[] words = enunturile.Split(delimiterChar);
                         foreach (string s in words)
                         {
-                            var qn = db.enunturi.Where(c => c.id.ToString() == s).Select(c => c);
+                            var qn = db.Questions.Where(c => c.Id.ToString() == s).Select(c => c);
                             foreach (var y in qn)
-                            { enunturiExistente += y.enunt + "\n"; }
+                            { enunturiExistente += y.QuestionText + "\n"; }
                         }
 
                         DialogResult box = MessageBox.Show("Testul contine deja urmatoarele enunturi. Doriti sa le stergeti - YES? Doriti sa le suprascrieti? - NO\n" + enunturiExistente, "INFO", MessageBoxButtons.YesNo);
                         if (box == DialogResult.Yes)
                         {
-                            x.enunturi = "";
+                            x.Questions.Clear();
                             for (int i = 0; i < checkedListBox1.Items.Count; i++)
                             {
                                 if (checkedListBox1.GetItemChecked(i))
                                 {
                                     char delimiter = '\t';
                                     string[] word = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                    if (i + 1 == checkedListBox1.Items.Count)
-                                        x.enunturi += word[0];
-                                    else
-                                        x.enunturi += word[0] + ",";
+                                    Question enunt = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(word[0]));
+                                    x.Questions.Add(enunt);
                                 }
-
                             }
-                            MessageBox.Show("Au fost adaugate enunturile cu id:" + x.enunturi);
+                            MessageBox.Show("Au fost adaugate enunturile in baza de date");
                         }
                         else
                         {
@@ -143,15 +145,12 @@ namespace Biologie
                                 {
                                     char delimiter = '\t';
                                     string[] word = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                    if (i + 1 == checkedListBox1.Items.Count)
-                                        x.enunturi += word[0];
-                                    else
-                                        x.enunturi += word[0] + ",";
-
+                                    Question enunt = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(word[0]));
+                                    x.Questions.Add(enunt);
                                 }
 
                             }
-                            MessageBox.Show("Au fost adaugate enunturile cu id:" + x.enunturi);
+                            MessageBox.Show("Au fost adaugate enunturile in baza de date");
                         }
                     }
                 db.SaveChanges();

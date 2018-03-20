@@ -7,23 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Biologie
+namespace Biologie.EntityFramework
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class enunturi
+    public partial class Result
     {
-        internal int raspunsa;
-
-        public int id { get; set; }
-        public int dificultate { get; set; }
-        public string enunt { get; set; }
-        public int tip { get; set; }
-        public string raspuns { get; set; }
-        public string varianta1 { get; set; }
-        public string varianta2 { get; set; }
-        public string varianta3 { get; set; }
-        public string varianta4 { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int Mark { get; set; }
+        public int TestId { get; set; }
+    
+        public virtual Account Account { get; set; }
+        public virtual Test Test { get; set; }
     }
 }

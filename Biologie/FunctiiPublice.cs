@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Windows.Forms;
+using Biologie.EntityFramework;
 
 namespace Biologie
 {
@@ -16,18 +17,15 @@ namespace Biologie
 
             using (var db = new EntityFBio())
             {
-                
-                if (db.accounts.Any(s => (s.password == password) && (s.user == user)))
-                        return true;
-                    else
-                        return false;       
+
+                if (db.Accounts.Any(s => (s.User == user) && (s.Password == password))) return true; else return false;
             }
         }
         public bool verificaUser(string user)
         {
             using (var db = new EntityFBio())
             {
-                if (db.accounts.Any(s => (s.user == user)))
+                if (db.Accounts.Any(s => (s.User == user)))
                     return true;
                 else
                     return false;
@@ -37,21 +35,15 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = from x in db.accounts where x.user == user select x;
-                foreach(var x in query)
-                {
-                    return x.id;
-                }
-                return 0;
+               int id = db.Accounts.Where(s => s.User == user).Select(s => s.Id).FirstOrDefault();
+               return id;
             }
         }
         public bool isAdmin(string user)
         {
             using (var db = new EntityFBio())
             {
-                if (db.accounts.Any(s => (s.user == user) && (s.admin == 1)))
-                    return true;
-                return false;
+                return (db.Accounts.Where(s => s.Class.ClassName == "Admin").Select(s=>s.Id).FirstOrDefault() > 0) ? true : false;
             }
         }
         public void adaugaCont(string user, string password, int admin, string clasa)
@@ -62,17 +54,18 @@ namespace Biologie
                 {
                     using (var db = new EntityFBio())
                     {
-                        int lastID = 0;
-                        var query = from y in db.accounts select y;
-                        lastID = query.Max(item => item.id);
-                        accounts cont = new accounts();
-                        cont.id = lastID+1;
-                        cont.user = user;
-                        cont.password = password;
-                        cont.admin = admin;
-                        cont.clasa = clasa;
-                        db.accounts.Add(cont);
-                        db.SaveChanges();
+                        Account account = new Account();
+                        account.User = user;
+                        account.Password = password;
+                        if(admin>0)
+                        {
+                            account.ClasaId = 1;
+                        }
+                        else
+                        {
+                            account.ClasaId = db.Classes.Where(s => s.ClassName == clasa).Select(s => s.Id).FirstOrDefault();
+                        }
+                        db.SaveChanges();                       
                         MessageBox.Show("Cont creeat cu succes(user= " + user + ")");
                     }
                 }
@@ -87,7 +80,7 @@ namespace Biologie
             }
         }
 
-         public void adaugaTest(string nume, string enunt = "")
+         public void adaugaTest(string nume, List<Question> enunturi)
         {
             if(nume != "" && !verificaTest(nume))
             {
@@ -95,16 +88,16 @@ namespace Biologie
                 {
                     using (var db = new EntityFBio())
                     {
-                        int lastID = 1;
-                        var query = from y in db.teste select y;
-                        lastID = query.Max(item => item.id) + 1;
-                        teste test = new teste();
-                        test.id = lastID;
-                        test.nume = nume;
-                        test.enunturi = enunt;
-                        db.teste.Add(test);
+
+                        Test test = new Test();
+                        test.Name = nume;
+                        test.Questions = enunturi;
+                        db.Tests.Add(test);
                         db.SaveChanges();
-                        MessageBox.Show("Testul cu numele " + nume +", id "+ lastID +" care contine enunturile cu id:" + enunt +" a fost creeat si introdus cu succes in baza de date");
+                        string enunt="";
+                        foreach (var x in enunturi)
+                            enunt += x.Id + ", ";
+                        MessageBox.Show("Testul cu numele " + nume +", id "+ test.Id +" care contine enunturile cu id:" + enunt +" a fost creeat si introdus cu succes in baza de date");
                     }
                 }
                 catch (Exception ex)
@@ -117,37 +110,55 @@ namespace Biologie
                 MessageBox.Show("Testul cu numele "+nume+" exista deja in baza de date.");
             }
         }
-
+        public void adaugaTest(string nume)
+        {
+            if (nume != "" && !verificaTest(nume))
+            {
+                try
+                {
+                    using (var db = new EntityFBio())
+                    {
+                        Test test = new Test();
+                        test.Name = nume;                       
+                        db.Tests.Add(test);                       
+                        db.SaveChanges();
+                        MessageBox.Show("Testul cu numele " + nume + ", id " + test.Id + " a fost adaugat in baza de date");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("A aparut o eroare la baza de date, contactati developerul cat mai rapid.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Testul cu numele " + nume + " exista deja in baza de date.");
+            }
+        }
         public void adaugaEnunt(int dificultate, string cerinta, int tip, string raspuns, string var1, string var2, string var3, string var4)
         {
             using (var db = new EntityFBio())
             {
-                enunturi enunt = new enunturi();
-                int lastID = 1;
-                var query = from y in db.enunturi select y;
-                lastID = query.Max(item => item.id) + 1;
+
+                Question intrebare = new Question();
                 if (tip == 0)
                 {
-                    enunt.id = lastID;
-                    enunt.dificultate = dificultate;
-                    enunt.enunt = cerinta;
-                    enunt.tip = tip;
-                    enunt.raspuns = raspuns;
-                    enunt.varianta1 = var1;
-                    enunt.varianta2 = var2;
-                    enunt.varianta3 = var3;
-                    enunt.varianta4 = var4;
-                    
+                    intrebare.Tip = 0;
+                    intrebare.QuestionText = cerinta;
+                    intrebare.Answer = raspuns;
+                    intrebare.choice1 = var1;
+                    intrebare.choice2 = var2;
+                    intrebare.choice3 = var3;
+                    intrebare.choice4 = var4;
                 }
                 else if(tip==1)
                 {
-                  enunt.id = lastID;
-                  enunt.dificultate = dificultate;
-                  enunt.enunt = cerinta;
-                  enunt.tip = tip;
-                  enunt.raspuns = raspuns;
+                    intrebare.Tip = 1;
+                    intrebare.QuestionText = cerinta;
+                    intrebare.Answer = raspuns;
                 }
-                db.enunturi.Add(enunt);
+                intrebare.Level = dificultate;
+                db.Questions.Add(intrebare);
                 db.SaveChanges();
                 if(tip == 0)
                     MessageBox.Show("Item-ul cu enuntul: " + cerinta + ", raspunsul " + raspuns + " si cu variantele de raspuns: \n-" + var1 + "\n-" + var2 + "\n-" + var3 + "\n-" + var4 + "\n a fost adaugat in baza de date");
@@ -160,7 +171,7 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                if (db.teste.Any(s => (s.nume == nume)))
+                if (db.Tests.Any(s => (s.Name == nume)))
                     return true;
                 else
                     return false;
@@ -171,9 +182,8 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = db.accounts.Where(item => (item.user == user));
-                foreach(var x in query)
-                    x.password = password;
+                var x = db.Accounts.FirstOrDefault(s => s.User == user);
+                x.Password = password;
                 db.SaveChanges();
             }
         }
@@ -181,20 +191,16 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var u = db.accounts.Where(x => x.user == user);
-                foreach (var x in u)
-                    return x.clasa;
-                return null;
+                var x = db.Accounts.FirstOrDefault(s => s.User == user);
+                return x.Class.ClassName;
             }
         }
         public string getTest(string clasa)
         {
             using (var db = new EntityFBio())
             {
-                var u = db.teste.Where(x => x.clasa == clasa);
-                foreach (var x in u)
-                    return x.nume;
-                return null;
+                var x = db.Classes.FirstOrDefault(s => s.ClassName == clasa);
+                return db.Tests.Where(s => s.ClassId == x.Id).Select(s => s.Name).FirstOrDefault();
             }
         }
     }

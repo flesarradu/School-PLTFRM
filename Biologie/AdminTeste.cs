@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Biologie.EntityFramework;
 
 namespace Biologie
 {
@@ -18,18 +19,18 @@ namespace Biologie
             
             using (var db = new EntityFBio())
             {
-                var query = from x in db.teste select x;
+                var query = from x in db.Tests select x;
                 foreach (var x in query)
                 {
-                    comboBox1.Items.Add(x.nume);
+                    comboBox1.Items.Add(x.Name);
+                }
+                foreach(var x in db.Classes )
+                {
+                    comboBox2.Items.Add(x.ClassName);
                 }
             }
             
-            comboBox2.Items.Add("10i");
-            comboBox2.Items.Add("10e");
-            comboBox2.Items.Add("10g");
-            comboBox2.Items.Add("11i");
-            comboBox2.Items.Add("12i");
+           
            
         }
 
@@ -39,9 +40,9 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = db.teste.Where(x => x.nume == comboBox1.SelectedItem.ToString());
-                foreach(var x in query)
-                    x.clasa = comboBox2.SelectedItem.ToString();
+                var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
+                foreach (var x in query)
+                    x.ClassId = db.Classes.FirstOrDefault(y => y.ClassName == comboBox2.SelectedItem.ToString()).Id;
                 db.SaveChanges();
                 MessageBox.Show("Testul a fost adaugat cu succes.");
                 

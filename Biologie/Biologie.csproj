@@ -14,7 +14,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\flesa\Desktop\AppBiologie\New\New03\</PublishUrl>
+    <PublishUrl>C:\Users\flesa\Desktop\AppBiologie\New\New02\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -94,10 +94,6 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data.Entity">
-      <Private>True</Private>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
@@ -138,32 +134,38 @@
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionTools.cs" />
-    <Compile Include="DataContext.cs" />
-    <Compile Include="DataContracts\SqlModels\Clasa.cs" />
-    <Compile Include="DataContracts\SqlModels\Intrebare.cs" />
-    <Compile Include="DataContracts\SqlModels\Nota.cs" />
-    <Compile Include="DataContracts\SqlModels\Raspuns.cs" />
-    <Compile Include="DataContracts\SqlModels\Test.cs" />
-    <Compile Include="DataContracts\SqlModels\User.cs" />
-    <Compile Include="DB_A36E0C_flesarraduDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DB_A36E0C_flesarraduDataSet.xsd</DependentUpon>
+    <Compile Include="EntityFramework\Account.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFBio.Context.cs">
+    <Compile Include="EntityFramework\Class.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\C__MigrationHistory.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\EntityFBio.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFBio.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFBio.cs">
+    <Compile Include="EntityFramework\EntityFBio.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFBio.Designer.cs">
+    <Compile Include="EntityFramework\EntityFBio.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFBio.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Question.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Result.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Test.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="FunctiiPublice.cs" />
     <Compile Include="Login.cs">
@@ -191,6 +193,7 @@
     <Compile Include="SchimbaParola.Designer.cs">
       <DependentUpon>SchimbaParola.cs</DependentUpon>
     </Compile>
+    <Compile Include="Test1.cs" />
     <Compile Include="Testare.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,11 +205,6 @@
     </Compile>
     <Compile Include="VizualizareRezultate.Designer.cs">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="_Database_EFBioDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_Database_EFBioDataSet.xsd</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdaugareElev.resx">
       <DependentUpon>AdaugareElev.cs</DependentUpon>
@@ -248,24 +246,15 @@
     <EmbeddedResource Include="VizualizareRezultate.resx">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.Config" />
-    <EntityDeploy Include="EntityFBio.edmx">
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Biologie_TemporaryKey.pfx" />
+    <EntityDeploy Include="EntityFramework\EntityFBio.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Biologie_TemporaryKey.pfx" />
-    <None Include="DB_A36E0C_flesarraduDataSet.xsc">
-      <DependentUpon>DB_A36E0C_flesarraduDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DB_A36E0C_flesarraduDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DB_A36E0C_flesarraduDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DB_A36E0C_flesarraduDataSet.xss">
-      <DependentUpon>DB_A36E0C_flesarraduDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="EntityFBio.edmx.diagram">
+    <None Include="EntityFramework\EntityFBio.edmx.diagram">
       <DependentUpon>EntityFBio.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -279,17 +268,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="_Database_EFBioDataSet.xsc">
-      <DependentUpon>_Database_EFBioDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="_Database_EFBioDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>_Database_EFBioDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="_Database_EFBioDataSet.xss">
-      <DependentUpon>_Database_EFBioDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -306,13 +284,14 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="EntityFBio.Context.tt">
+    <Content Include="EntityFramework\EntityFBio.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityFBio.edmx</DependentUpon>
       <LastGenOutput>EntityFBio.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EntityFBio.tt">
+    <Content Include="EntityFramework\EntityFBio.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityFBio.edmx</DependentUpon>
       <LastGenOutput>EntityFBio.cs</LastGenOutput>
