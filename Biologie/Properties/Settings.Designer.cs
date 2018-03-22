@@ -44,5 +44,16 @@ namespace Biologie.Properties {
                 return ((string)(this["DB_A36E0C_flesarraduConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sql6004.site4now.net;Initial Catalog=DB_A3795C_schoolpltfmr;Persist S" +
+            "ecurity Info=True;User ID=DB_A3795C_schoolpltfmr_admin;Password=Raduflesar1")]
+        public string DB_A3795C_schoolpltfmrConnectionString {
+            get {
+                return ((string)(this["DB_A3795C_schoolpltfmrConnectionString"]));
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Diagnostics;
-using Biologie.DataContracts.SqlModels;
+using Biologie.EntityFramework;
 
 namespace Biologie
 {
@@ -20,15 +20,18 @@ namespace Biologie
         int corecte = 0;
         int numarEnunturi = 0;
         int numarRaspunse = 0;
-        int[] raspunse = new int[100];
+        int[] raspunse = new int[200];
         int lastID = 0;
         int abandon = 0;
-        // Label cerinta = new Label();
+        Label cerinta = new Label();
         Test Test = new Test();
-        CheckBox[] labels = new CheckBox[4];
+        List<Question> Questions = new List<Question>();
+        CheckBox[] checkboxs = new CheckBox[4];
         TextBox campRaspuns = new TextBox();
         Button butonRaspuns = new Button();
         Button butonRaspuns1 = new Button();
+        Account User = new Account();
+        FunctiiPublice functii = new FunctiiPublice();
       
         public Testare(string user, string tes)
        {    
@@ -36,10 +39,16 @@ namespace Biologie
             InitializeComponent();
             test = tes;
             u = user;
-            for (int i = 0; i < 100; i++)
+
+            using (var db = new EntityFBio())
+            {
+                Test = db.Tests.FirstOrDefault(s => s.Name == tes);
+                Questions = functii.getQuestions(Test);
+                User = db.Accounts.FirstOrDefault(s => s.User == u);
+            }
+            for (int i = 0; i < 200; i++)
             {
                 raspunse[i] = 0;
-                
             }
             //BUTOANE
             int yx = 70, xy = 350;
@@ -83,65 +92,36 @@ namespace Biologie
             butonRaspuns1.Update();
             for (int i=0;i<4;i++)
             {
-                labels[i] = new CheckBox();
-                labels[i].Parent = this;
-                labels[i].Size = new Size(1650, 55);
-                labels[i].Location = new Point(yx, xy += 70);
-                tableLayoutPanel1.Controls.Add(labels[i], 0, i+1);
-                labels[i].Anchor = AnchorStyles.Left;
-                labels[i].Margin = margin;
-                labels[i].Update();
+                checkboxs[i] = new CheckBox();
+                checkboxs[i].Parent = this;
+                checkboxs[i].Size = new Size(1650, 55);
+                checkboxs[i].Location = new Point(yx, xy += 70);
+                tableLayoutPanel1.Controls.Add(checkboxs[i], 0, i+1);
+                checkboxs[i].Anchor = AnchorStyles.Left;
+                checkboxs[i].Margin = margin;
+                checkboxs[i].Update();
             }
 
-             WindowState = FormWindowState.Normal;
-             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-             Bounds = Screen.PrimaryScreen.Bounds;
-             Activate();
-            List<Test1> enunturiTest = new List<Test1>();
-            using (var db = new EntityFBio())
-            {   
-                string enunturi = "";
-                var query = from y in db.Teste select y;
-                foreach (var y in query)
-                {
-                    //if (y.Nume == tes)
-                    //    enunturi = y.enunturii;
-                }
-                char[] delimiterChar = { ',', ' ' };
-                string[] words = enunturi.Split(delimiterChar);
-                foreach (string s in words)
-                {
-                    if (s != "")
-                        enunturiTest.Add(new Test1() { enuntID = int.Parse(s) });
-                }
-
-                foreach (var x in enunturiTest)
-                {
-                    var q = from y in db.Intrebari where y.Id.Equals(x.enuntID) select y;
-                    foreach (var z in q)
-                    {
-                        //enunturi.Add(z);
-                        //enunturi[numarEnunturi++].raspunsa=0;
-                    }                
-                }
-            }
+            WindowState = FormWindowState.Normal;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Bounds = Screen.PrimaryScreen.Bounds;
+            Activate();
             butonRaspuns.Click += (s, args) => {
                 
                 for (int i = 0; i < 4; i++)
                 {
-                    if (labels[i].Checked)
+                    if (checkboxs[i].Checked)
                     {
-                        //if (labels[i].Text.ToLower() == enunturi[lastID].raspuns.ToLower())
-                        //{
-                        //    corecte++;
-                            
-                        //}
-                        labels[i].CheckState = CheckState.Unchecked;
+                        if (checkboxs[i].Text.ToLower() == Questions[lastID].Answer.ToLower())
+                        {
+                            corecte++;                           
+                        }
+                        checkboxs[i].CheckState = CheckState.Unchecked;
                         numarRaspunse++;
-                        //Enunturi[lastID].raspunsa = 1;
+                        Questions[lastID].Answered = true;
                         if (numarRaspunse < numarEnunturi)
                         {   
-                            // afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                           // afiseazaEnunt(Enunturi[numarRaspunse++].id);
                             afiseazaEnunt(getID());
                         }
                         else
@@ -162,13 +142,13 @@ namespace Biologie
             { 
                 butonRaspuns.Hide();
                 campRaspuns.Hide();
-                //if (campRaspuns.Text.ToLower() == Enunturi[lastID].raspuns.ToLower())
-                //{
-                //    corecte++;
-                //}
+                if (campRaspuns.Text.ToLower() == Questions[lastID].Answer.ToLower())
+                {
+                    corecte++;
+                }
                 campRaspuns.Text = "";
                 numarRaspunse++;
-                //Enunturi[lastID].raspunsa = 1;
+                Questions[lastID].Answered = true;
                 if (numarRaspunse < numarEnunturi)
                 {
                     
@@ -198,16 +178,16 @@ namespace Biologie
         }
         private void afiseazaEnunt(int id)
         {
-            //foreach(var x in Enunturi)
-            //{
-            //    if(x.id == id)
-            //    {
-            //        if (x.tip == 1)
-            //            afiseazaEnunt1(x.enunt, x.raspuns);
-            //        else if (x.tip == 0)
-            //            afiseazaEnunt0(x.enunt, x.raspuns, x.varianta1, x.varianta2, x.varianta3, x.varianta4);
-            //    }
-            //}
+            foreach (var x in Questions)
+            {
+                if (x.Id == id)
+                {
+                    if (x.Type == 1)
+                        afiseazaEnunt1(x.QuestionText, x.Answer);
+                    else if (x.Type == 0)
+                        afiseazaEnunt0(x.QuestionText, x.Answer, x.choice1, x.choice2, x.choice3, x.choice4);
+                }
+            }
         }
         
         private void afiseazaEnunt1(string enunt, string raspuns)
@@ -217,10 +197,10 @@ namespace Biologie
             tableLayoutPanel1.Controls.Add(butonRaspuns1, 0, 5);
             for (int i=0;i<4;i++)
             {
-                labels[i].Hide();
+                checkboxs[i].Hide();
             }
             labelCerinta.Text = enunt;
-            tableLayoutPanel1.Controls.Remove(labels[1]);
+            tableLayoutPanel1.Controls.Remove(checkboxs[1]);
             //Camp de Raspuns
 
             tableLayoutPanel1.Controls.Add(campRaspuns, 0, 2);
@@ -235,14 +215,12 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                //var query = from x in db.rezultate select x;
-                //int ID = query.Max(x => x.id);
-                //double punctaj = 90.0/numarEnunturi;
-                //double rezultatul = punctaj * corecte + 10;
-                //rezultatul = Math.Round(rezultatul, 2);
-                //db.rezultate.Add(new rezultate { id = ID + 1, user = u, test = test, rezultat=rezultatul.ToString()  });
-                //db.SaveChanges();
-                //MessageBox.Show("Rezultat: " + rezultatul + " puncte");
+                double punctaj = 90.0 / numarEnunturi;
+                double rezultatul = punctaj * corecte + 10;
+                rezultatul = Math.Round(rezultatul, 2);
+                db.Results.Add(new Result { TestId = Test.Id, Mark = rezultatul, UserId = User.Id });
+                db.SaveChanges();
+                MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }
             abandon = 1;
         }
@@ -253,37 +231,37 @@ namespace Biologie
             tableLayoutPanel1.Controls.Remove(butonRaspuns1);
             butonRaspuns1.Hide();
             tableLayoutPanel1.Controls.Add(butonRaspuns, 0, 5);
-            tableLayoutPanel1.Controls.Add(labels[1], 0, 2);
+            tableLayoutPanel1.Controls.Add(checkboxs[1], 0, 2);
             labelCerinta.Text = enunt;
             butonRaspuns.Show();
             //Checkbox Variante           
             for (int i = 0; i < 4; i++)
             { 
-                labels[i].Show();
+                checkboxs[i].Show();
             }
-            labels[0].Text = v1;
-            labels[1].Text = v2;
-            labels[2].Text = v3;
-            labels[3].Text = v4;          
+            checkboxs[0].Text = v1;
+            checkboxs[1].Text = v2;
+            checkboxs[2].Text = v3;
+            checkboxs[3].Text = v4;          
         }
         private int getID()
         {
             Random rand = new Random(DateTime.Now.Millisecond);
             int n=0;
             
-            int[] vct = new int[100];
-            //for(int i=0; i<numarEnunturi;i++)
-                //if(Enunturi[i].raspunsa==0)
-                //{
-                //    vct[n++] = i;
-                //}
+            int[] vct = new int[200];
+            for (int i = 0; i < numarEnunturi; i++)
+                if (!Questions[i].Answered)
+                {
+                    vct[n++] = i;
+                }
             int idNumber = 0;
             if (n > 1)
                 idNumber = rand.Next(0, n - 1);
          
             lastID = vct[idNumber];
-            //return Enunturi[vct[idNumber]].id;
-            return 0;
+            return Questions[vct[idNumber]].Id;
+           
         }
 
         private void label4_Click(object sender, EventArgs e)

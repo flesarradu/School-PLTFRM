@@ -59,14 +59,14 @@ namespace Biologie
                         account.Password = password;
                         if(admin>0)
                         {
-                            account.ClasaId = 1;
+                            account.ClassId = 1;
                         }
                         else
                         {
-                            account.ClasaId = db.Classes.Where(s => s.ClassName == clasa).Select(s => s.Id).FirstOrDefault();
+                            account.ClassId = db.Classes.Where(s => s.ClassName == clasa).Select(s => s.Id).FirstOrDefault();
                         }
                         db.SaveChanges();                       
-                        MessageBox.Show("Cont creeat cu succes(user= " + user + ")");
+                        MessageBox.Show("Cont creat cu succes(user= " + user + ")");
                     }
                 }
                 catch (Exception ex)
@@ -88,15 +88,17 @@ namespace Biologie
                 {
                     using (var db = new EntityFBio())
                     {
-
                         Test test = new Test();
                         test.Name = nume;
-                        test.Questions = enunturi;
                         db.Tests.Add(test);
                         db.SaveChanges();
                         string enunt="";
                         foreach (var x in enunturi)
+                        {
                             enunt += x.Id + ", ";
+                            db.QuestionTests.Add(new QuestionTest { QuestionId = x.Id, TestId = test.Id });
+                        }
+                        db.SaveChanges();
                         MessageBox.Show("Testul cu numele " + nume +", id "+ test.Id +" care contine enunturile cu id:" + enunt +" a fost creeat si introdus cu succes in baza de date");
                     }
                 }
@@ -143,7 +145,7 @@ namespace Biologie
                 Question intrebare = new Question();
                 if (tip == 0)
                 {
-                    intrebare.Tip = 0;
+                    intrebare.Type = 0;
                     intrebare.QuestionText = cerinta;
                     intrebare.Answer = raspuns;
                     intrebare.choice1 = var1;
@@ -153,7 +155,7 @@ namespace Biologie
                 }
                 else if(tip==1)
                 {
-                    intrebare.Tip = 1;
+                    intrebare.Type = 1;
                     intrebare.QuestionText = cerinta;
                     intrebare.Answer = raspuns;
                 }
@@ -202,6 +204,19 @@ namespace Biologie
                 var x = db.Classes.FirstOrDefault(s => s.ClassName == clasa);
                 return db.Tests.Where(s => s.ClassId == x.Id).Select(s => s.Name).FirstOrDefault();
             }
+        }
+        public List<Question> getQuestions(Test test)
+        {
+            List<Question> Questions = new List<Question>();
+            using (EntityFBio db = new EntityFBio())
+            {
+                var QuestionsTests = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s);
+                foreach (var x in QuestionsTests)
+                {
+                    Questions.Add(db.Questions.FirstOrDefault(s => s.Id == x.QuestionId));
+                }
+            }
+            return Questions;
         }
     }
 }

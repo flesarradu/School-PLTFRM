@@ -25,10 +25,11 @@ namespace Biologie.EntityFramework
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountTest> AccountTests { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<QuestionTest> QuestionTests { get; set; }
         public virtual DbSet<Result> Results { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
     }

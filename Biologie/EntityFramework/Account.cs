@@ -17,16 +17,16 @@ namespace Biologie.EntityFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
-            this.Results = new HashSet<Result>();
+            this.AccountTests = new HashSet<AccountTest>();
         }
     
         public int Id { get; set; }
         public string User { get; set; }
         public string Password { get; set; }
-        public int ClasaId { get; set; }
+        public int ClassId { get; set; }
     
         public virtual Class Class { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Result> Results { get; set; }
+        public virtual ICollection<AccountTest> AccountTests { get; set; }
     }
 }

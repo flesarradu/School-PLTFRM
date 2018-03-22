@@ -134,13 +134,18 @@
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionTools.cs" />
+    <Compile Include="EntityFBio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFBio.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Account.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Class.cs">
+    <Compile Include="EntityFramework\AccountTest.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\C__MigrationHistory.cs">
+    <Compile Include="EntityFramework\Class.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\EntityFBio.Context.cs">
@@ -159,6 +164,9 @@
       <DependentUpon>EntityFBio.edmx</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Question.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\QuestionTest.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\Result.cs">
@@ -254,6 +262,17 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="EntityFBio.xsc">
+      <DependentUpon>EntityFBio.xsd</DependentUpon>
+    </None>
+    <None Include="EntityFBio.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="EntityFBio.xss">
+      <DependentUpon>EntityFBio.xsd</DependentUpon>
+    </None>
     <None Include="EntityFramework\EntityFBio.edmx.diagram">
       <DependentUpon>EntityFBio.edmx</DependentUpon>
     </None>

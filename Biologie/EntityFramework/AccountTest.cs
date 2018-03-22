@@ -12,22 +12,21 @@ namespace Biologie.EntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class Test
+    public partial class AccountTest
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Test()
+        public AccountTest()
         {
-            this.AccountTests = new HashSet<AccountTest>();
-            this.QuestionTests = new HashSet<QuestionTest>();
+            this.Results = new HashSet<Result>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int ClassId { get; set; }
+        public int UserId { get; set; }
+        public int TestId { get; set; }
     
+        public virtual Account Account { get; set; }
+        public virtual Test Test { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AccountTest> AccountTests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionTest> QuestionTests { get; set; }
+        public virtual ICollection<Result> Results { get; set; }
     }
 }

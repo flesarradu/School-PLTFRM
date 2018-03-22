@@ -5,16 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="EntityFBio_Namespace.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,7 +12,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="ClasaId" Type="int" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountTests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Classes">
           <Key>
@@ -36,24 +34,31 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
           <Property Name="QuestionText" Type="nvarchar" MaxLength="2000" Nullable="false" />
-          <Property Name="Tip" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
           <Property Name="Answer" Type="nvarchar" MaxLength="2000" Nullable="false" />
           <Property Name="choice1" Type="nvarchar" MaxLength="2000" />
           <Property Name="choice2" Type="nvarchar" MaxLength="2000" />
           <Property Name="choice3" Type="nvarchar" MaxLength="2000" />
           <Property Name="choice4" Type="nvarchar" MaxLength="2000" />
-          <Property Name="Test_Id" Type="int" />
-          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="Answered" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionTests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Results">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Mark" Type="int" Nullable="false" />
-          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AccountTestId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tests">
           <Key>
@@ -63,7 +68,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="ClassId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_dbo_Accounts_dbo_Classes_ClasaId">
+        <Association Name="FK_dbo_Accounts_dbo_Classes_ClassId">
           <End Role="Classes" Type="Self.Classes" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -73,71 +78,110 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Accounts">
-              <PropertyRef Name="ClasaId" />
+              <PropertyRef Name="ClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Questions_dbo_Tests_Test_Id">
-          <End Role="Tests" Type="Self.Tests" Multiplicity="0..1" />
-          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tests">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Questions">
-              <PropertyRef Name="Test_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_Results_dbo_Accounts_UserId">
+        <Association Name="FK_dbo_AccountTests_dbo_Accounts_UserId">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <End Role="AccountTests" Type="Self.AccountTests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accounts">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Results">
+            <Dependent Role="AccountTests">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Results_dbo_Tests_TestId">
+        <Association Name="FK_dbo_AccountTests_dbo_Tests_TestId">
           <End Role="Tests" Type="Self.Tests" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <End Role="AccountTests" Type="Self.AccountTests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tests">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Results">
+            <Dependent Role="AccountTests">
               <PropertyRef Name="TestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_QuestionTests_dbo_Questions_QuestionId">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuestionTests" Type="Self.QuestionTests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionTests">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QuestionTests_dbo_Tests_TestId">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuestionTests" Type="Self.QuestionTests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionTests">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Results_dbo_AccountTests_AccountTestId">
+          <End Role="AccountTests" Type="Self.AccountTests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Results" Type="Self.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountTests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="AccountTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EntityFBio_NamespaceStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountTests" EntityType="Self.AccountTests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionTests" EntityType="Self.QuestionTests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tests" EntityType="Self.Tests" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_dbo_Accounts_dbo_Classes_ClasaId" Association="Self.FK_dbo_Accounts_dbo_Classes_ClasaId">
+          <AssociationSet Name="FK_dbo_Accounts_dbo_Classes_ClassId" Association="Self.FK_dbo_Accounts_dbo_Classes_ClassId">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Questions_dbo_Tests_Test_Id" Association="Self.FK_dbo_Questions_dbo_Tests_Test_Id">
-            <End Role="Tests" EntitySet="Tests" />
-            <End Role="Questions" EntitySet="Questions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Results_dbo_Accounts_UserId" Association="Self.FK_dbo_Results_dbo_Accounts_UserId">
+          <AssociationSet Name="FK_dbo_AccountTests_dbo_Accounts_UserId" Association="Self.FK_dbo_AccountTests_dbo_Accounts_UserId">
             <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Results" EntitySet="Results" />
+            <End Role="AccountTests" EntitySet="AccountTests" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Results_dbo_Tests_TestId" Association="Self.FK_dbo_Results_dbo_Tests_TestId">
+          <AssociationSet Name="FK_dbo_AccountTests_dbo_Tests_TestId" Association="Self.FK_dbo_AccountTests_dbo_Tests_TestId">
             <End Role="Tests" EntitySet="Tests" />
+            <End Role="AccountTests" EntitySet="AccountTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_QuestionTests_dbo_Questions_QuestionId" Association="Self.FK_dbo_QuestionTests_dbo_Questions_QuestionId">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionTests" EntitySet="QuestionTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_QuestionTests_dbo_Tests_TestId" Association="Self.FK_dbo_QuestionTests_dbo_Tests_TestId">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="QuestionTests" EntitySet="QuestionTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Results_dbo_AccountTests_AccountTestId" Association="Self.FK_dbo_Results_dbo_AccountTests_AccountTestId">
+            <End Role="AccountTests" EntitySet="AccountTests" />
             <End Role="Results" EntitySet="Results" />
           </AssociationSet>
         </EntityContainer>
@@ -146,16 +190,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EntityFBio_Namespace" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="C__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -163,9 +197,20 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClasaId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Class" Relationship="Self.FK_dbo_Accounts_dbo_Classes_ClasaId" FromRole="Accounts" ToRole="Classes" />
-          <NavigationProperty Name="Results" Relationship="Self.FK_dbo_Results_dbo_Accounts_UserId" FromRole="Accounts" ToRole="Results" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="Self.FK_dbo_Accounts_dbo_Classes_ClassId" FromRole="Accounts" ToRole="Classes" />
+          <NavigationProperty Name="AccountTests" Relationship="Self.FK_dbo_AccountTests_dbo_Accounts_UserId" FromRole="Accounts" ToRole="AccountTests" />
+        </EntityType>
+        <EntityType Name="AccountTest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_dbo_AccountTests_dbo_Accounts_UserId" FromRole="AccountTests" ToRole="Accounts" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_dbo_AccountTests_dbo_Tests_TestId" FromRole="AccountTests" ToRole="Tests" />
+          <NavigationProperty Name="Results" Relationship="Self.FK_dbo_Results_dbo_AccountTests_AccountTestId" FromRole="AccountTests" ToRole="Results" />
         </EntityType>
         <EntityType Name="Class">
           <Key>
@@ -173,34 +218,42 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_Classes_ClasaId" FromRole="Classes" ToRole="Accounts" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_dbo_Accounts_dbo_Classes_ClassId" FromRole="Classes" ToRole="Accounts" />
         </EntityType>
         <EntityType Name="Question">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
           <Property Name="QuestionText" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Tip" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
           <Property Name="Answer" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="choice1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="choice2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="choice3" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
           <Property Name="choice4" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Test_Id" Type="Int32" />
-          <Property Name="Level" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Test" Relationship="Self.FK_dbo_Questions_dbo_Tests_Test_Id" FromRole="Questions" ToRole="Tests" />
+          <Property Name="Answered" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="QuestionTests" Relationship="Self.FK_dbo_QuestionTests_dbo_Questions_QuestionId" FromRole="Questions" ToRole="QuestionTests" />
+        </EntityType>
+        <EntityType Name="QuestionTest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_dbo_QuestionTests_dbo_Questions_QuestionId" FromRole="QuestionTests" ToRole="Questions" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_dbo_QuestionTests_dbo_Tests_TestId" FromRole="QuestionTests" ToRole="Tests" />
         </EntityType>
         <EntityType Name="Result">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Mark" Type="Int32" Nullable="false" />
-          <Property Name="TestId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_dbo_Results_dbo_Accounts_UserId" FromRole="Results" ToRole="Accounts" />
-          <NavigationProperty Name="Test" Relationship="Self.FK_dbo_Results_dbo_Tests_TestId" FromRole="Results" ToRole="Tests" />
+          <Property Name="Mark" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="AccountTestId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountTest" Relationship="Self.FK_dbo_Results_dbo_AccountTests_AccountTestId" FromRole="Results" ToRole="AccountTests" />
         </EntityType>
         <EntityType Name="Test">
           <Key>
@@ -209,10 +262,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Questions" Relationship="Self.FK_dbo_Questions_dbo_Tests_Test_Id" FromRole="Tests" ToRole="Questions" />
-          <NavigationProperty Name="Results" Relationship="Self.FK_dbo_Results_dbo_Tests_TestId" FromRole="Tests" ToRole="Results" />
+          <NavigationProperty Name="AccountTests" Relationship="Self.FK_dbo_AccountTests_dbo_Tests_TestId" FromRole="Tests" ToRole="AccountTests" />
+          <NavigationProperty Name="QuestionTests" Relationship="Self.FK_dbo_QuestionTests_dbo_Tests_TestId" FromRole="Tests" ToRole="QuestionTests" />
         </EntityType>
-        <Association Name="FK_dbo_Accounts_dbo_Classes_ClasaId">
+        <Association Name="FK_dbo_Accounts_dbo_Classes_ClassId">
           <End Role="Classes" Type="Self.Class" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -222,72 +275,111 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Accounts">
-              <PropertyRef Name="ClasaId" />
+              <PropertyRef Name="ClassId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Results_dbo_Accounts_UserId">
+        <Association Name="FK_dbo_AccountTests_dbo_Accounts_UserId">
           <End Role="Accounts" Type="Self.Account" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Results" Type="Self.Result" Multiplicity="*" />
+          <End Role="AccountTests" Type="Self.AccountTest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accounts">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Results">
+            <Dependent Role="AccountTests">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Questions_dbo_Tests_Test_Id">
-          <End Role="Tests" Type="Self.Test" Multiplicity="0..1" />
-          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+        <Association Name="FK_dbo_AccountTests_dbo_Tests_TestId">
+          <End Role="Tests" Type="Self.Test" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountTests" Type="Self.AccountTest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tests">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Questions">
-              <PropertyRef Name="Test_Id" />
+            <Dependent Role="AccountTests">
+              <PropertyRef Name="TestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Results_dbo_Tests_TestId">
-          <End Role="Tests" Type="Self.Test" Multiplicity="1">
+        <Association Name="FK_dbo_Results_dbo_AccountTests_AccountTestId">
+          <End Role="AccountTests" Type="Self.AccountTest" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Results" Type="Self.Result" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Tests">
+            <Principal Role="AccountTests">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Results">
+              <PropertyRef Name="AccountTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QuestionTests_dbo_Questions_QuestionId">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuestionTests" Type="Self.QuestionTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionTests">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_QuestionTests_dbo_Tests_TestId">
+          <End Role="Tests" Type="Self.Test" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="QuestionTests" Type="Self.QuestionTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuestionTests">
               <PropertyRef Name="TestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EntityFBio" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
           <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountTests" EntityType="Self.AccountTest" />
           <EntitySet Name="Classes" EntityType="Self.Class" />
           <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="QuestionTests" EntityType="Self.QuestionTest" />
           <EntitySet Name="Results" EntityType="Self.Result" />
           <EntitySet Name="Tests" EntityType="Self.Test" />
-          <AssociationSet Name="FK_dbo_Accounts_dbo_Classes_ClasaId" Association="Self.FK_dbo_Accounts_dbo_Classes_ClasaId">
+          <AssociationSet Name="FK_dbo_Accounts_dbo_Classes_ClassId" Association="Self.FK_dbo_Accounts_dbo_Classes_ClassId">
             <End Role="Classes" EntitySet="Classes" />
             <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Results_dbo_Accounts_UserId" Association="Self.FK_dbo_Results_dbo_Accounts_UserId">
+          <AssociationSet Name="FK_dbo_AccountTests_dbo_Accounts_UserId" Association="Self.FK_dbo_AccountTests_dbo_Accounts_UserId">
             <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="AccountTests" EntitySet="AccountTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AccountTests_dbo_Tests_TestId" Association="Self.FK_dbo_AccountTests_dbo_Tests_TestId">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="AccountTests" EntitySet="AccountTests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Results_dbo_AccountTests_AccountTestId" Association="Self.FK_dbo_Results_dbo_AccountTests_AccountTestId">
+            <End Role="AccountTests" EntitySet="AccountTests" />
             <End Role="Results" EntitySet="Results" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Questions_dbo_Tests_Test_Id" Association="Self.FK_dbo_Questions_dbo_Tests_Test_Id">
-            <End Role="Tests" EntitySet="Tests" />
+          <AssociationSet Name="FK_dbo_QuestionTests_dbo_Questions_QuestionId" Association="Self.FK_dbo_QuestionTests_dbo_Questions_QuestionId">
             <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionTests" EntitySet="QuestionTests" />
           </AssociationSet>
-          <AssociationSet Name="FK_dbo_Results_dbo_Tests_TestId" Association="Self.FK_dbo_Results_dbo_Tests_TestId">
+          <AssociationSet Name="FK_dbo_QuestionTests_dbo_Tests_TestId" Association="Self.FK_dbo_QuestionTests_dbo_Tests_TestId">
             <End Role="Tests" EntitySet="Tests" />
-            <End Role="Results" EntitySet="Results" />
+            <End Role="QuestionTests" EntitySet="QuestionTests" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -296,23 +388,22 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EntityFBio_NamespaceStoreContainer" CdmEntityContainer="EntityFBio">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="EntityFBio_Namespace.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="EntityFBio_Namespace.Account">
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="ClasaId" ColumnName="ClasaId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountTests">
+            <EntityTypeMapping TypeName="EntityFBio_Namespace.AccountTest">
+              <MappingFragment StoreEntitySet="AccountTests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -328,15 +419,24 @@
             <EntityTypeMapping TypeName="EntityFBio_Namespace.Question">
               <MappingFragment StoreEntitySet="Questions">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
-                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="choice1" ColumnName="choice1" />
                 <ScalarProperty Name="choice2" ColumnName="choice2" />
                 <ScalarProperty Name="choice3" ColumnName="choice3" />
                 <ScalarProperty Name="choice4" ColumnName="choice4" />
-                <ScalarProperty Name="Test_Id" ColumnName="Test_Id" />
-                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Answered" ColumnName="Answered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionTests">
+            <EntityTypeMapping TypeName="EntityFBio_Namespace.QuestionTest">
+              <MappingFragment StoreEntitySet="QuestionTests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -344,9 +444,8 @@
             <EntityTypeMapping TypeName="EntityFBio_Namespace.Result">
               <MappingFragment StoreEntitySet="Results">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Mark" ColumnName="Mark" />
-                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="AccountTestId" ColumnName="AccountTestId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

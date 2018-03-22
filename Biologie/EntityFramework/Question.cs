@@ -14,17 +14,24 @@ namespace Biologie.EntityFramework
     
     public partial class Question
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Question()
+        {
+            this.QuestionTests = new HashSet<QuestionTest>();
+        }
+    
         public int Id { get; set; }
+        public int Level { get; set; }
         public string QuestionText { get; set; }
-        public int Tip { get; set; }
+        public int Type { get; set; }
         public string Answer { get; set; }
         public string choice1 { get; set; }
         public string choice2 { get; set; }
         public string choice3 { get; set; }
         public string choice4 { get; set; }
-        public Nullable<int> Test_Id { get; set; }
-        public int Level { get; set; }
+        public bool Answered { get; set; }
     
-        public virtual Test Test { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionTest> QuestionTests { get; set; }
     }
 }

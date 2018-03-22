@@ -4,17 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c23961256a8d4da78cf5b1545dcc8678" Name="Diagram1">
-        <EntityTypeShape EntityType="EntityFBio_Namespace.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBio_Namespace.Account" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBio_Namespace.Class" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBio_Namespace.Question" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBio_Namespace.Result" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EntityFBio_Namespace.Test" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_Accounts_dbo_Classes_ClasaId" ManuallyRouted="false" />
-        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_Results_dbo_Accounts_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_Questions_dbo_Tests_Test_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_Results_dbo_Tests_TestId" ManuallyRouted="false" />
+      <Diagram DiagramId="e15b8fb336eb4dfd9b70dbf2608bd1de" Name="Diagram1">
+        <EntityTypeShape EntityType="EntityFBio_Namespace.Account" Width="1.5" PointX="6.375" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityFBio_Namespace.AccountTest" Width="1.5" PointX="3.875" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityFBio_Namespace.Class" Width="1.5" PointX="6.375" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityFBio_Namespace.Question" Width="1.5" PointX="1.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityFBio_Namespace.QuestionTest" Width="1.5" PointX="1.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityFBio_Namespace.Result" Width="1.5" PointX="3.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityFBio_Namespace.Test" Width="1.5" PointX="3.875" PointY="0.625" IsExpanded="true" />
+        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_Accounts_dbo_Classes_ClassId" ManuallyRouted="false" />
+        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_AccountTests_dbo_Accounts_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_AccountTests_dbo_Tests_TestId" ManuallyRouted="false" />
+        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_Results_dbo_AccountTests_AccountTestId" ManuallyRouted="false" />
+        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_QuestionTests_dbo_Questions_QuestionId" ManuallyRouted="false" />
+        <AssociationConnector Association="EntityFBio_Namespace.FK_dbo_QuestionTests_dbo_Tests_TestId" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

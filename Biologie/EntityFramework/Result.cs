@@ -15,11 +15,9 @@ namespace Biologie.EntityFramework
     public partial class Result
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public int Mark { get; set; }
-        public int TestId { get; set; }
+        public decimal Mark { get; set; }
+        public int AccountTestId { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual Test Test { get; set; }
+        public virtual AccountTest AccountTest { get; set; }
     }
 }

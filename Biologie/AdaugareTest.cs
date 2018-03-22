@@ -59,7 +59,7 @@ namespace Biologie
             adaugare.Font = comboBox1.Font;
             adaugare.ForeColor = comboBox1.ForeColor;
             adaugare.Anchor = AnchorStyles.Left;
-            
+
             adaugare.Name = "adaugare";
             adaugare.Click += (s, e) =>
             {
@@ -84,33 +84,37 @@ namespace Biologie
 
         private void button1_Click(object sender, EventArgs e)
         {
+            List<Question> Questions = new List<Question>();
             using (var db = new EntityFBio())
             {
-                var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());      
+                var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
                 foreach (var x in query)
-                   if (x.Questions.Count==0)
-                    {                     
+                    if (faraEnunturi(x))
+                    {
                         for (int i = 0; i < checkedListBox1.Items.Count; i++)
                         {
                             if (checkedListBox1.GetItemChecked(i))
                             {
                                 char delimiter = '\t';
                                 string[] words = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                Question enunt = new Question();
-                                var en = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(words[0]));
-                                enunt = en;
-                                x.Questions.Add(enunt);                           
+                                Question en = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(words[0]));
+                                Questions.Add(en);
                             }
                         }
+                        foreach (var y in Questions)
+                        {
+                            db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
+                        }
+
                         MessageBox.Show("Au fost adaugate enunturile in baza de date.");
                     }
                     else
                     {
                         string enunturile = "";
-                        foreach(var xy in x.Questions)
+                        foreach (var xy in x.Questions)
                         {
                             enunturile += xy.QuestionText + ", ";
-                        }  
+                        }
                         string enunturiExistente = "";
                         char[] delimiterChar = { ',', ' ' };
                         string[] words = enunturile.Split(delimiterChar);
@@ -124,7 +128,8 @@ namespace Biologie
                         DialogResult box = MessageBox.Show("Testul contine deja urmatoarele enunturi. Doriti sa le stergeti - YES? Doriti sa le suprascrieti? - NO\n" + enunturiExistente, "INFO", MessageBoxButtons.YesNo);
                         if (box == DialogResult.Yes)
                         {
-                            x.Questions.Clear();
+                            //stergeEnunturi
+                            clearTest(x);
                             for (int i = 0; i < checkedListBox1.Items.Count; i++)
                             {
                                 if (checkedListBox1.GetItemChecked(i))
@@ -132,8 +137,13 @@ namespace Biologie
                                     char delimiter = '\t';
                                     string[] word = checkedListBox1.Items[i].ToString().Split(delimiter);
                                     Question enunt = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(word[0]));
-                                    x.Questions.Add(enunt);
+                                    Questions.Add(enunt);
                                 }
+                                foreach (var y in Questions)
+                                {
+                                    db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
+                                }
+
                             }
                             MessageBox.Show("Au fost adaugate enunturile in baza de date");
                         }
@@ -146,7 +156,11 @@ namespace Biologie
                                     char delimiter = '\t';
                                     string[] word = checkedListBox1.Items[i].ToString().Split(delimiter);
                                     Question enunt = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(word[0]));
-                                    x.Questions.Add(enunt);
+                                    Questions.Add(enunt);
+                                }
+                                foreach (var y in Questions)
+                                {
+                                    db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
                                 }
 
                             }
@@ -174,6 +188,40 @@ namespace Biologie
         {
             if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Maximized)
                 this.WindowState = FormWindowState.Minimized;
+        }
+        public bool faraEnunturi(Test test)
+        {
+            using (var db = new EntityFBio())
+            {
+                int x = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s.Id).FirstOrDefault();
+                return (x > 0) ? true : false;
+            }
+            return false;
+        }
+        public List<Question> getQuestions(Test test)
+        {
+            List<Question> Questions = new List<Question>();
+            using (EntityFBio db = new EntityFBio())
+            {
+                var QuestionsTests = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s);
+                foreach (var x in QuestionsTests)
+                {
+                    Questions.Add(db.Questions.FirstOrDefault(s => s.Id == x.QuestionId));
+                }
+            }
+            return Questions;
+        }
+        public bool clearTest(Test test)
+        {
+            using (var db = new EntityFBio())
+            {
+                var query = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s);
+                foreach (var x in query)
+                {
+                    db.QuestionTests.Remove(x);
+                }
+                db.SaveChanges();
+            }
         }
     }
 }
