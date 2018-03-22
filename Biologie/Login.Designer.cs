@@ -55,13 +55,13 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Montserrat Light", 20F);
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(248, 331);
+            this.button1.Location = new System.Drawing.Point(231, 331);
             this.button1.Margin = new System.Windows.Forms.Padding(6, 7, 20, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 52);
+            this.button1.Size = new System.Drawing.Size(109, 52);
             this.button1.TabIndex = 9;
             this.button1.Text = "Acces";
             this.button1.UseVisualStyleBackColor = false;
@@ -110,13 +110,13 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Montserrat", 25.75F);
+            this.label2.Font = new System.Drawing.Font("Montserrat Light", 30F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label2.Location = new System.Drawing.Point(78, 183);
+            this.label2.Location = new System.Drawing.Point(78, 174);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 43);
+            this.label2.Size = new System.Drawing.Size(151, 62);
             this.label2.TabIndex = 8;
             this.label2.Text = "Parola";
             // 
@@ -125,13 +125,13 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Montserrat", 25.75F);
+            this.label1.Font = new System.Drawing.Font("Montserrat Light", 30F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.label1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label1.Location = new System.Drawing.Point(78, 31);
+            this.label1.Location = new System.Drawing.Point(78, 22);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 43);
+            this.label1.Size = new System.Drawing.Size(115, 62);
             this.label1.TabIndex = 7;
             this.label1.Text = "User";
             // 
@@ -151,11 +151,11 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Montserrat", 31F, System.Drawing.FontStyle.Bold);
+            this.label4.Font = new System.Drawing.Font("Montserrat", 31F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label4.Location = new System.Drawing.Point(296, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 52);
+            this.label4.Size = new System.Drawing.Size(51, 52);
             this.label4.TabIndex = 9;
             this.label4.Text = "X";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -166,13 +166,13 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Montserrat", 32F, System.Drawing.FontStyle.Bold);
+            this.label3.Font = new System.Drawing.Font("Montserrat", 32F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label3.Location = new System.Drawing.Point(67, 9);
             this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(205, 53);
+            this.label3.Size = new System.Drawing.Size(206, 53);
             this.label3.TabIndex = 8;
             this.label3.Text = "LOGARE";
             // 

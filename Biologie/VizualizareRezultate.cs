@@ -16,6 +16,7 @@ namespace Biologie
         public VizualizareRezultate()
         {
             InitializeComponent();
+            
             fetchComboBox();
         }
 
@@ -42,6 +43,7 @@ namespace Biologie
             else
             {
                 listBox1.Items.Clear();
+                listBox1.Items.Add("Nume\t\tTest\t\tPunctaj");
                 string Mark = "";
                 string Test = "";
                 string User = "";
@@ -52,7 +54,8 @@ namespace Biologie
                         AccountTest accountTest = db.AccountTests.Where(s => s.Id == x.AccountTestId).Select(s => s).FirstOrDefault();
                         User = accountTest.Account.User;
                         Test = accountTest.Test.Name;
-                        listBox1.Items.Add(User + "\t" + Test + "\t" + Mark);
+                        Mark = x.Mark.ToString();
+                        listBox1.Items.Add(User + "\t\t" + Test + "\t\t" + Mark);
                     }
                 }
             }
@@ -62,6 +65,7 @@ namespace Biologie
         private void populateList(int classId)
         {
             listBox1.Items.Clear();
+            listBox1.Items.Add("Nume\t\tTest\t\tPunctaj");
             string Mark = "";
             string Test = "";
             string User = "";
@@ -72,8 +76,9 @@ namespace Biologie
                     AccountTest accountTest = db.AccountTests.Where(s => s.Id == x.AccountTestId).Select(s => s).FirstOrDefault();
                     User = accountTest.Account.User;
                     Test = accountTest.Test.Name;
+                    Mark = x.Mark.ToString();
                     if (accountTest.Account.ClassId == classId)
-                        listBox1.Items.Add(User + "\t" + Test + "\t" + Mark);
+                        listBox1.Items.Add(User + "\t\t" + Test + "\t\t" + Mark);
                 }
             }
         }
@@ -88,6 +93,16 @@ namespace Biologie
                     if (x.ClassName != "Admin") { comboBox1.Items.Add(x.ClassName);  }
                 }
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
