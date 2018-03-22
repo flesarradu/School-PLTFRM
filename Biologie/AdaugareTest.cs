@@ -59,7 +59,6 @@ namespace Biologie
             adaugare.Font = comboBox1.Font;
             adaugare.ForeColor = comboBox1.ForeColor;
             adaugare.Anchor = AnchorStyles.Left;
-
             adaugare.Name = "adaugare";
             adaugare.Click += (s, e) =>
             {
@@ -98,7 +97,8 @@ namespace Biologie
                             {
                                 char delimiter = '\t';
                                 string[] words = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                Question en = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(words[0]));
+                                int id = int.Parse(words[0]);
+                                Question en = db.Questions.FirstOrDefault(s => s.Id==id );
                                 Questions.Add(en);
                                 
                             }
@@ -107,8 +107,7 @@ namespace Biologie
                         {
                             db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
                         }
-
-                        MessageBox.Show("Au fost adaugate enunturile in baza de date.");
+                        
                     }
                     else
                     {
@@ -127,7 +126,7 @@ namespace Biologie
                             { enunturiExistente += y.QuestionText + "\n"; }
                         }
 
-                        DialogResult box = MessageBox.Show("Testul contine deja urmatoarele enunturi. Doriti sa le stergeti - YES? Doriti sa le suprascrieti? - NO\n" + enunturiExistente, "INFO", MessageBoxButtons.YesNo);
+                        DialogResult box = MessageBox.Show("Testul contine deja enunturi. Doriti sa le stergeti - YES? Doriti sa le suprascrieti? - NO\n" + enunturiExistente, "INFO", MessageBoxButtons.YesNo);
                         if (box == DialogResult.Yes)
                         {
                             //stergeEnunturi
@@ -141,14 +140,13 @@ namespace Biologie
                                     int id = int.Parse(word[0]);
                                     Question enunt = db.Questions.Where(s => s.Id==id).Select(s=>s).FirstOrDefault();
                                     Questions.Add(enunt);
-                                }
-                                foreach (var y in Questions)
-                                {
-                                    db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
-                                }
-
+                                }    
                             }
-                            MessageBox.Show("Au fost adaugate enunturile in baza de date");
+                            foreach (var y in Questions)
+                            {
+                                db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
+                            }
+                            
                         }
                         else
                         {
@@ -158,19 +156,25 @@ namespace Biologie
                                 {
                                     char delimiter = '\t';
                                     string[] word = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                    Question enunt = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(word[0]));
+                                    int id = int.Parse(word[0]);
+                                    Question enunt = db.Questions.Where(s => s.Id == id).Select(s => s).FirstOrDefault();
                                     Questions.Add(enunt);
                                 }
-                                foreach (var y in Questions)
-                                {
-                                    db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
-                                }
-
                             }
-                            MessageBox.Show("Au fost adaugate enunturile in baza de date");
+                            foreach (var y in Questions)
+                            {
+                                db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
+                            }
+                            
                         }
                     }
-                db.SaveChanges();
+                try { db.SaveChanges(); MessageBox.Show("Testul a fost adaugat in baza de date"); }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("A aparut o eroare la baza de date, verificati ca enunturile sa nu se suprapuna la un singur test (un enunt, o singura data intr-un test)");
+                }
+                
+
             }
         }
 
@@ -196,10 +200,17 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                int x = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s.Id).FirstOrDefault();
-                return (x > 0) ? true : false;
+                int x = 0;
+                foreach(var y in db.QuestionTests)
+                {
+                    if(y.TestId == test.Id)
+                    {
+                        x++;
+                    }
+                }
+                return (x > 0) ? false : true;
             }
-            return false;
+            
         }
         public List<Question> getQuestions(Test test)
         {

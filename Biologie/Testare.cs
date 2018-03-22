@@ -46,6 +46,7 @@ namespace Biologie
                 Questions = functii.getQuestions(Test);
                 User = db.Accounts.FirstOrDefault(s => s.User == u);
             }
+            numarEnunturi = Questions.Count;
             for (int i = 0; i < 200; i++)
             {
                 raspunse[i] = 0;
@@ -215,10 +216,15 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                double punctaj = 90.0 / numarEnunturi;
-                double rezultatul = punctaj * corecte + 10;
+                decimal punctaj = 90 / numarEnunturi;
+                decimal rezultatul = punctaj * corecte + 10;
                 rezultatul = Math.Round(rezultatul, 2);
-              //  db.Results.Add(new Result { AccountTest=User. });
+                AccountTest accountTest = new AccountTest();
+                accountTest.UserId = User.Id;
+                accountTest.TestId = Test.Id;
+                db.AccountTests.Add(accountTest);
+                db.SaveChanges();
+                db.Results.Add(new Result { Mark = rezultatul, AccountTestId = accountTest.Id });
                 db.SaveChanges();
                 MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }
