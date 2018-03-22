@@ -88,6 +88,7 @@ namespace Biologie
             using (var db = new EntityFBio())
             {
                 var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
+               
                 foreach (var x in query)
                     if (faraEnunturi(x))
                     {
@@ -99,6 +100,7 @@ namespace Biologie
                                 string[] words = checkedListBox1.Items[i].ToString().Split(delimiter);
                                 Question en = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(words[0]));
                                 Questions.Add(en);
+                                
                             }
                         }
                         foreach (var y in Questions)
@@ -111,7 +113,7 @@ namespace Biologie
                     else
                     {
                         string enunturile = "";
-                        foreach (var xy in x.Questions)
+                        foreach (var xy in Questions)
                         {
                             enunturile += xy.QuestionText + ", ";
                         }
@@ -136,7 +138,8 @@ namespace Biologie
                                 {
                                     char delimiter = '\t';
                                     string[] word = checkedListBox1.Items[i].ToString().Split(delimiter);
-                                    Question enunt = db.Questions.FirstOrDefault(s => s.Id.ToString().Equals(word[0]));
+                                    int id = int.Parse(word[0]);
+                                    Question enunt = db.Questions.Where(s => s.Id==id).Select(s=>s).FirstOrDefault();
                                     Questions.Add(enunt);
                                 }
                                 foreach (var y in Questions)
@@ -220,7 +223,9 @@ namespace Biologie
                 {
                     db.QuestionTests.Remove(x);
                 }
-                db.SaveChanges();
+                if (db.SaveChanges()!=0)
+                    return true;
+                else return false;
             }
         }
     }

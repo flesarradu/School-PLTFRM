@@ -134,11 +134,6 @@
       <DependentUpon>AdminTeste.cs</DependentUpon>
     </Compile>
     <Compile Include="ConnectionTools.cs" />
-    <Compile Include="EntityFBio.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntityFBio.xsd</DependentUpon>
-    </Compile>
     <Compile Include="EntityFramework\Account.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
@@ -201,18 +196,11 @@
     <Compile Include="SchimbaParola.Designer.cs">
       <DependentUpon>SchimbaParola.cs</DependentUpon>
     </Compile>
-    <Compile Include="Test1.cs" />
     <Compile Include="Testare.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Testare.Designer.cs">
       <DependentUpon>Testare.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VizualizareRezultate.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VizualizareRezultate.Designer.cs">
-      <DependentUpon>VizualizareRezultate.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdaugareElev.resx">
       <DependentUpon>AdaugareElev.cs</DependentUpon>
@@ -251,9 +239,6 @@
     <EmbeddedResource Include="Testare.resx">
       <DependentUpon>Testare.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VizualizareRezultate.resx">
-      <DependentUpon>VizualizareRezultate.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
@@ -262,17 +247,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="EntityFBio.xsc">
-      <DependentUpon>EntityFBio.xsd</DependentUpon>
-    </None>
-    <None Include="EntityFBio.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>EntityFBio.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="EntityFBio.xss">
-      <DependentUpon>EntityFBio.xsd</DependentUpon>
-    </None>
     <None Include="EntityFramework\EntityFBio.edmx.diagram">
       <DependentUpon>EntityFBio.edmx</DependentUpon>
     </None>

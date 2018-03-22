@@ -18,8 +18,11 @@ namespace Biologie
             using (var db = new EntityFBio())
             {
 
-                if (db.Accounts.Any(s => (s.User == user) && (s.Password == password))) return true; else return false;
+                var cont = db.Accounts.Where(s => s.User == user).Select(s => s).FirstOrDefault();
+                return (cont.Password == password) ? true : false;
+                                    
             }
+            return false;
         }
         public bool verificaUser(string user)
         {
@@ -43,10 +46,10 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                return (db.Accounts.Where(s => s.Class.ClassName == "Admin").Select(s=>s.Id).FirstOrDefault() > 0) ? true : false;
+                return (db.Accounts.Where(s => s.User==user).Select(s=>s.Class.ClassName).FirstOrDefault() == "Admin") ? true : false;
             }
         }
-        public void adaugaCont(string user, string password, int admin, string clasa)
+        public void adaugaCont(string user, string password, int clasa)
         {
             if (user != "" && password != "" && !verificaUser(user))
             {
@@ -57,16 +60,10 @@ namespace Biologie
                         Account account = new Account();
                         account.User = user;
                         account.Password = password;
-                        if(admin>0)
-                        {
-                            account.ClassId = 1;
-                        }
-                        else
-                        {
-                            account.ClassId = db.Classes.Where(s => s.ClassName == clasa).Select(s => s.Id).FirstOrDefault();
-                        }
-                        db.SaveChanges();                       
-                        MessageBox.Show("Cont creat cu succes(user= " + user + ")");
+                        account.ClassId = clasa;
+                        db.Accounts.Add(account);
+                        if(db.SaveChanges()!=0)
+                             MessageBox.Show("Cont creat cu succes(user= " + user + ")");
                     }
                 }
                 catch (Exception ex)
@@ -78,6 +75,7 @@ namespace Biologie
             {
                 MessageBox.Show("User/Parola prea scurte sau User existent");
             }
+            
         }
 
          public void adaugaTest(string nume, List<Question> enunturi)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biologie.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,22 +16,27 @@ namespace Biologie
         public AdaugareElev()
         {
             InitializeComponent();
-            comboBox1.Items.Add("10i");
-            comboBox1.Items.Add("10e");
-            comboBox1.Items.Add("10g");
-            comboBox1.Items.Add("11i");
-            comboBox1.Items.Add("12i");
+            using (var db = new EntityFBio())
+            {
+                foreach(var x in db.Classes)
+                {
+                    comboBox1.Items.Add(x.ClassName);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string username = textBox1.Text, parola = textBox2.Text;
-            int admin = 0;
+            int clasa=0;
             if (checkBox1.Checked)
-                admin = 1;
-            string clasa = comboBox1.SelectedItem.ToString();
+               clasa = 1;
+            using(var db = new EntityFBio())
+            {
+                clasa = db.Classes.Where(s => s.ClassName == comboBox1.SelectedItem.ToString()).FirstOrDefault().Id;
+            }
             FunctiiPublice login = new FunctiiPublice();
-            login.adaugaCont(username, parola, admin, clasa);
+            login.adaugaCont(username, parola, clasa);
             Close();
         }
 

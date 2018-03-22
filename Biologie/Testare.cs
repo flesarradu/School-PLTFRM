@@ -218,7 +218,7 @@ namespace Biologie
                 double punctaj = 90.0 / numarEnunturi;
                 double rezultatul = punctaj * corecte + 10;
                 rezultatul = Math.Round(rezultatul, 2);
-                db.Results.Add(new Result { TestId = Test.Id, Mark = rezultatul, UserId = User.Id });
+              //  db.Results.Add(new Result { AccountTest=User. });
                 db.SaveChanges();
                 MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }

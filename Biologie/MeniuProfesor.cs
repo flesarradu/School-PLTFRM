@@ -52,10 +52,10 @@ namespace Biologie
 
         private void button5_Click(object sender, EventArgs e)
         {
-            VizualizareRezultate visa = new VizualizareRezultate();
-            Hide();
-            visa.FormClosed += (s, args) => Show();
-            visa.Show();
+            //VizualizareRezultate visa = new VizualizareRezultate();
+          //  Hide();
+          //  visa.FormClosed += (s, args) => Show();
+          //  visa.Show();
         }
 
         private void label2_Click(object sender, EventArgs e)
