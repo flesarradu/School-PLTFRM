@@ -14,7 +14,8 @@ namespace Biologie
     {
         Label[] labels = new Label[4];
         TextBox[] textBoxs = new TextBox[4];
-        CheckBox[] checkBoxs = new CheckBox[4];
+        RadioButton[] checkBoxs = new RadioButton[4];
+        
         Button adaugare = new Button();
         FunctiiPublice functii = new FunctiiPublice();
         public AdaugareEnunt()
@@ -27,7 +28,7 @@ namespace Biologie
             {
                 labels[i] = new Label();
                 textBoxs[i] = new TextBox();
-                checkBoxs[i] = new CheckBox();
+                checkBoxs[i] = new RadioButton();
             }
             trackBar1.SetRange(1, 5);
             trackBar1.Hide();
@@ -156,7 +157,7 @@ namespace Biologie
 
         private void label8_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -171,6 +172,11 @@ namespace Biologie
         {
             if (this.WindowState == FormWindowState.Normal || this.WindowState == FormWindowState.Maximized)
                 this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

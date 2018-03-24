@@ -26,7 +26,7 @@ namespace Biologie
         Label cerinta = new Label();
         Test Test = new Test();
         List<Question> Questions = new List<Question>();
-        CheckBox[] checkboxs = new CheckBox[4];
+        RadioButton[] checkboxs = new RadioButton[4];
         TextBox campRaspuns = new TextBox();
         Button butonRaspuns = new Button();
         Button butonRaspuns1 = new Button();
@@ -46,6 +46,11 @@ namespace Biologie
                 Questions = functii.getQuestions(Test);
                 User = db.Accounts.FirstOrDefault(s => s.User == u);
             }
+
+            WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+            Bounds = Screen.PrimaryScreen.Bounds;
+
             numarEnunturi = Questions.Count;
             for (int i = 0; i < 200; i++)
             {
@@ -93,7 +98,7 @@ namespace Biologie
             butonRaspuns1.Update();
             for (int i=0;i<4;i++)
             {
-                checkboxs[i] = new CheckBox();
+                checkboxs[i] = new RadioButton();
                 checkboxs[i].Parent = this;
                 checkboxs[i].Size = new Size(1650, 55);
                 checkboxs[i].Location = new Point(yx, xy += 70);
@@ -117,7 +122,7 @@ namespace Biologie
                         {
                             corecte++;                           
                         }
-                        checkboxs[i].CheckState = CheckState.Unchecked;
+                        checkboxs[i].Checked = false;
                         numarRaspunse++;
                         Questions[lastID].Answered = true;
                         if (numarRaspunse < numarEnunturi)
@@ -179,16 +184,14 @@ namespace Biologie
         }
         private void afiseazaEnunt(int id)
         {
-            foreach (var x in Questions)
-            {
-                if (x.Id == id)
-                {
-                    if (x.Type == 1)
-                        afiseazaEnunt1(x.QuestionText, x.Answer);
-                    else if (x.Type == 0)
-                        afiseazaEnunt0(x.QuestionText, x.Answer, x.choice1, x.choice2, x.choice3, x.choice4);
-                }
-            }
+
+            
+                if (Questions[id].Type == 1)
+                    afiseazaEnunt1(Questions[id].QuestionText, Questions[id].Answer);
+                else if (Questions[id].Type == 0)
+                    afiseazaEnunt0(Questions[id].QuestionText, Questions[id].Answer, Questions[id].choice1, Questions[id].choice2, Questions[id].choice3, Questions[id].choice4);
+            
+            
         }
         
         private void afiseazaEnunt1(string enunt, string raspuns)
@@ -216,16 +219,18 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                decimal punctaj = 90 / numarEnunturi;
-                decimal rezultatul = punctaj * corecte + 10;
+                double punctaj = 90.0 / numarEnunturi;
+                decimal rezultatul = (decimal) punctaj * corecte + 10;
                 rezultatul = Math.Round(rezultatul, 2);
                 AccountTest accountTest = new AccountTest();
                 accountTest.UserId = User.Id;
                 accountTest.TestId = Test.Id;
                 db.AccountTests.Add(accountTest);
                 db.SaveChanges();
+                
                 db.Results.Add(new Result { Mark = rezultatul, AccountTestId = accountTest.Id });
                 db.SaveChanges();
+                
                 MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }
             abandon = 1;
@@ -266,7 +271,7 @@ namespace Biologie
                 idNumber = rand.Next(0, n - 1);
          
             lastID = vct[idNumber];
-            return Questions[vct[idNumber]].Id;
+            return lastID;
            
         }
 
@@ -278,7 +283,6 @@ namespace Biologie
                 finalizareTest();
                 Application.Exit();
             }
-           
         }
 
         private void Testare_FormClosing(object sender, FormClosingEventArgs e)

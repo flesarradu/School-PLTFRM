@@ -26,7 +26,8 @@ namespace Biologie
                 }
                 foreach(var x in db.Classes )
                 {
-                    comboBox2.Items.Add(x.ClassName);
+                    if(x.ClassName!="Admin")
+                        comboBox2.Items.Add(x.ClassName);
                 }
             }
             
@@ -60,6 +61,11 @@ namespace Biologie
         }
 
         private void label4_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
             Close();
         }

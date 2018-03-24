@@ -109,5 +109,10 @@ namespace Biologie
                 button1_Click_1(sender, e);
             }
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            button1_Click_1(sender, e);
+        }
     }
 }

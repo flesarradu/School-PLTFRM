@@ -97,12 +97,17 @@ namespace Biologie
 
         private void label4_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

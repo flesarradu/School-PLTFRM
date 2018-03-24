@@ -21,7 +21,7 @@ namespace Biologie
         {
             InitializeComponent();
             fetchComboBox2();
-            checkedListBox1.Items.Add("ID   Nivel \t Enunt");
+            checkedListBox1.Items.Add("ID\tNivel \t Enunt");
             afiseazaEnunturi();
         }
 
@@ -70,6 +70,7 @@ namespace Biologie
 
         private void fetchComboBox2()
         {
+            comboBox1.Items.Clear();
             using (var db = new EntityFBio())
             {
                 var query = from x in db.Tests select x;
@@ -87,7 +88,7 @@ namespace Biologie
             using (var db = new EntityFBio())
             {
                 var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
-               
+                
                 foreach (var x in query)
                     if (faraEnunturi(x))
                     {
@@ -180,7 +181,7 @@ namespace Biologie
 
         private void label5_Click(object sender, EventArgs e)
         {
-            Close();
+            Application.Exit();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -238,6 +239,11 @@ namespace Biologie
                     return true;
                 else return false;
             }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
