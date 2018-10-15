@@ -26,12 +26,11 @@ namespace Biologie
             {
                 string test, clasa;
                 clasa = functii.getClasa(user);
-                test = functii.getTest(clasa);
-                Testare visa = new Testare(user, test);
+                test = functii.GetTest(clasa);
+                Testare visa = new Testare(user, test,false);
                 Hide();
                 visa.Closed += (s, args) => Close();
                 visa.Show();
-
             }
         }
 
@@ -46,6 +45,19 @@ namespace Biologie
         private void label4_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Exersare visa = new Exersare(user);
+            Hide();
+            visa.Closed += (s, args) => Show();
+            visa.Show();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+           
         }
     }
 }

@@ -16,23 +16,19 @@ namespace Biologie
         public AdminTeste()
         {
             InitializeComponent();
-            
+
             using (var db = new EntityFBio())
             {
-                var query = from x in db.Tests select x;
-                foreach (var x in query)
+                foreach (var x in db.Tests)
                 {
                     comboBox1.Items.Add(x.Name);
                 }
-                foreach(var x in db.Classes )
+                foreach (var x in db.Classes)
                 {
-                    if(x.ClassName!="Admin")
+                    if (x.ClassName != "Admin")
                         comboBox2.Items.Add(x.ClassName);
                 }
             }
-            
-           
-           
         }
 
       
@@ -41,9 +37,15 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-                var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
-                foreach (var x in query)
-                    x.ClassId = db.Classes.FirstOrDefault(y => y.ClassName == comboBox2.SelectedItem.ToString()).Id;
+                //var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
+                //foreach (var x in query)
+                //    x.ClassId = db.Classes.FirstOrDefault(y => y.ClassName == comboBox2.SelectedItem.ToString()).Id;
+
+                var query = db.Classes.Where(x => x.ClassName == comboBox2.SelectedItem.ToString());
+                foreach(var x in query)
+                {
+                    x.TestId = db.Tests.FirstOrDefault(y => y.Name == comboBox1.SelectedItem.ToString()).Id;
+                }
                 db.SaveChanges();
                 MessageBox.Show("Testul a fost adaugat cu succes.");
                 

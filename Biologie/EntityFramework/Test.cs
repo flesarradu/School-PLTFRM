@@ -18,15 +18,19 @@ namespace Biologie.EntityFramework
         public Test()
         {
             this.AccountTests = new HashSet<AccountTest>();
+            this.Classes = new HashSet<Class>();
             this.QuestionTests = new HashSet<QuestionTest>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public int ClassId { get; set; }
+        public Nullable<int> Exersare { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AccountTest> AccountTests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Class> Classes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuestionTest> QuestionTests { get; set; }
     }

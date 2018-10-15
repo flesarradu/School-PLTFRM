@@ -15,6 +15,7 @@ namespace Biologie
         Label[] labels = new Label[4];
         TextBox[] textBoxs = new TextBox[4];
         RadioButton[] checkBoxs = new RadioButton[4];
+        PictureBox[] pictureBoxes = new PictureBox[4];
         
         Button adaugare = new Button();
         FunctiiPublice functii = new FunctiiPublice();
@@ -23,12 +24,15 @@ namespace Biologie
             InitializeComponent();
             comboBox1.Items.Add("0");
             comboBox1.Items.Add("1");
+            comboBox1.Items.Add("2");
+            
             label4.Hide();
             for (int i = 0; i < 4; i++)
             {
                 labels[i] = new Label();
                 textBoxs[i] = new TextBox();
                 checkBoxs[i] = new RadioButton();
+                pictureBoxes[i] = new PictureBox();
             }
             trackBar1.SetRange(1, 5);
             trackBar1.Hide();
@@ -82,13 +86,14 @@ namespace Biologie
                         checkBoxs[i].Show();
                     }
                 }
-                else
+                else if (comboBox1.SelectedItem.ToString() == "1")
                 {
                     for (int i = 0; i < 4; i++)
                     {
                         labels[i].Hide();
                         textBoxs[i].Hide();
                         checkBoxs[i].Hide();
+                        pictureBoxes[i].Hide();
                     }
                     labels[1].Location = new Point(x, y + 30);
                     labels[1].Parent = this;
@@ -107,8 +112,48 @@ namespace Biologie
                     textBoxs[1].Update();
                     textBoxs[1].Show();
                 }
+                else if (comboBox1.SelectedItem.ToString() == "2")
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        labels[i].Hide();
+                        textBoxs[i].Hide();
+                        checkBoxs[i].Hide();
+                        pictureBoxes[i].Hide();
+                        pictureBoxes[i].Location = new Point(x+=200, y-100);
+                        pictureBoxes[i].Size = new Size(150,150);
+                        pictureBoxes[i].Parent = this;
+                        pictureBoxes[i].Anchor = AnchorStyles.Top;
+                        pictureBoxes[i].ImageLocation = "https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-9/22853109_1533778786658799_6439743616560860887_n.jpg?_nc_cat=0&oh=19a69e80155b7eb833231e1d2e2383b7&oe=5C38D7DB";
+                        pictureBoxes[i].SizeMode = PictureBoxSizeMode.StretchImage;
+                        pictureBoxes[i].Update();
+                        pictureBoxes[i].Show();
+                        checkBoxs[i].Location = new Point(x+30, y + 50);
+                        checkBoxs[i].Parent = this;
+                        checkBoxs[i].Text = "Corect";
+                        checkBoxs[i].Anchor = AnchorStyles.Top;
+                        checkBoxs[i].Font = comboBox1.Font;
+                        checkBoxs[i].ForeColor = comboBox1.ForeColor;
+                        checkBoxs[i].Update();
+                        checkBoxs[i].Show();
+                    }
+                   foreach(var xy in pictureBoxes)
+                    {
+                        xy.Click += (s, args) =>
+                        {
+                            var AdaugareImagine = new AdaugareImagine(xy.ImageLocation);
+                            AdaugareImagine.Show();
+                            Hide();
+                            AdaugareImagine.Closed += (s1, args1) =>
+                            {
+                                Show(); xy.ImageLocation = AdaugareImagine.ImageString;
+                            };
+                        };
+                    }
+
+                }
                 Button adaugaEnunt = new Button();
-                adaugaEnunt.Location = new Point(836, 627);
+                adaugaEnunt.Location = new Point(this.Width - 200,this.Height - 100);
                 adaugaEnunt.Size = new Size(174, 63);
                 adaugaEnunt.Parent = this;
                 adaugaEnunt.Text = "Adauga Enunt";
@@ -125,7 +170,7 @@ namespace Biologie
                         {
                             functii.adaugaEnunt(int.Parse(trackBar1.Value.ToString()), textBox1.Text, int.Parse(comboBox1.SelectedItem.ToString()), textBoxs[1].Text.ToString(), null, null, null, null);
                         }
-                        else
+                        else if (comboBox1.SelectedItem.ToString() == "0")
                         {
                             string rezultat = "0";
                             for (int i = 0; i < 4; i++)
@@ -134,6 +179,21 @@ namespace Biologie
                                     rezultat = textBoxs[i].Text;
                             }
                             functii.adaugaEnunt(int.Parse(trackBar1.Value.ToString()), textBox1.Text, int.Parse(comboBox1.SelectedItem.ToString()), rezultat, textBoxs[0].Text.ToString(), textBoxs[1].Text.ToString(), textBoxs[2].Text.ToString(), textBoxs[3].Text.ToString());
+                        }
+                        else if (comboBox1.SelectedItem.ToString() == "2")
+                        {
+                            string rezultat = "";
+                            for (int i = 0; i < 4; i++)
+                            {
+                                if (checkBoxs[i].Checked)
+                                    rezultat = i.ToString();
+                            }
+                            string img1, img2, img3, img4;
+                            img1 = pictureBoxes[0].ImageLocation;
+                            img2 = pictureBoxes[1].ImageLocation;
+                            img3 = pictureBoxes[2].ImageLocation;
+                            img4 = pictureBoxes[3].ImageLocation;
+                            functii.adaugaEnunt(int.Parse(trackBar1.Value.ToString()), textBox1.Text, int.Parse(comboBox1.SelectedItem.ToString()), rezultat, img1, img2, img3, img4);
                         }
                         textBox1.Text = "";
                         for (int i = 0; i < 4; i++)
@@ -147,6 +207,11 @@ namespace Biologie
             {
                 MessageBox.Show("Eroare la baza de date");
             }
+        }
+
+        private void AdaugareEnunt_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -177,6 +242,16 @@ namespace Biologie
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+ 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

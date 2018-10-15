@@ -14,7 +14,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\flesa\Desktop\PCID-Biologie\v3.2-SmarterASP\</PublishUrl>
+    <PublishUrl>C:\Users\flesa\Desktop\School PLTFRM\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -61,7 +61,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>EF4DA3EE29511FB5A54DDFBB865673036C137525</ManifestCertificateThumbprint>
@@ -121,6 +121,12 @@
     <Compile Include="AdaugareEnunt.Designer.cs">
       <DependentUpon>AdaugareEnunt.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdaugareImagine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdaugareImagine.Designer.cs">
+      <DependentUpon>AdaugareImagine.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdaugareTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,12 @@
     <Compile Include="EntityFramework\Class.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\C__MigrationHistory.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\database_firewall_rules.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\EntityFBio.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -158,6 +170,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFBio.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\Evaluare.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Image.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\Item.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Question.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
@@ -167,8 +188,23 @@
     <Compile Include="EntityFramework\Result.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\sp_helpdiagrams_Result.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\sysdiagram.cs">
+      <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\Test.cs">
       <DependentUpon>EntityFBio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Exersare.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Exersare.Designer.cs">
+      <DependentUpon>Exersare.cs</DependentUpon>
     </Compile>
     <Compile Include="FunctiiPublice.cs" />
     <Compile Include="Login.cs">
@@ -188,6 +224,13 @@
     </Compile>
     <Compile Include="MeniuProfesor.Designer.cs">
       <DependentUpon>MeniuProfesor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NotifyWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotifyWindow.Designer.cs">
+      <DependentUpon>NotifyWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="SchimbaParola.cs">
@@ -214,11 +257,17 @@
     <EmbeddedResource Include="AdaugareEnunt.resx">
       <DependentUpon>AdaugareEnunt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AdaugareImagine.resx">
+      <DependentUpon>AdaugareImagine.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdaugareTest.resx">
       <DependentUpon>AdaugareTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminTeste.resx">
       <DependentUpon>AdminTeste.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Exersare.resx">
+      <DependentUpon>Exersare.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -228,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MeniuProfesor.resx">
       <DependentUpon>MeniuProfesor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotifyWindow.resx">
+      <DependentUpon>NotifyWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -286,7 +338,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="EntityFramework\EntityFBio.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

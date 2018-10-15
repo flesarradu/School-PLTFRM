@@ -17,6 +17,7 @@ namespace Biologie
     {
         string test="";
         string u = "";
+        bool exersare = false;
         int corecte = 0;
         int numarEnunturi = 0;
         int numarRaspunse = 0;
@@ -27,19 +28,21 @@ namespace Biologie
         Test Test = new Test();
         List<Question> Questions = new List<Question>();
         RadioButton[] checkboxs = new RadioButton[4];
+        RadioButton[] radioButtonsImg = new RadioButton[4];
         TextBox campRaspuns = new TextBox();
         Button butonRaspuns = new Button();
         Button butonRaspuns1 = new Button();
+        Button butonRaspuns2 = new Button();
         Account User = new Account();
         FunctiiPublice functii = new FunctiiPublice();
       
-        public Testare(string user, string tes)
+        public Testare(string user, string tes, bool exersareB)
        {    
             
             InitializeComponent();
             test = tes;
             u = user;
-
+            exersare = exersareB;
             using (var db = new EntityFBio())
             {
                 Test = db.Tests.FirstOrDefault(s => s.Name == tes);
@@ -59,13 +62,21 @@ namespace Biologie
             //BUTOANE
             int yx = 70, xy = 350;
             butonRaspuns1.Parent = this;
+            butonRaspuns2.Parent = this;
             butonRaspuns1.Location = new Point(1463, 801);
+            butonRaspuns2.Location = new Point(1263, 780);
             butonRaspuns1.Size = new Size(250, 65);
+            butonRaspuns2.Size = new Size(250, 65);
             butonRaspuns1.Anchor = AnchorStyles.Right;
+            butonRaspuns2.Anchor = AnchorStyles.Right;
             butonRaspuns1.Font = labelCerinta.Font;
+            butonRaspuns2.Font = labelCerinta.Font;
             butonRaspuns1.Font = new Font(butonRaspuns1.Font.FontFamily, 20);
+            butonRaspuns2.Font = new Font(butonRaspuns2.Font.FontFamily, 20);
             butonRaspuns1.Text = "Raspunde";
+            butonRaspuns2.Text = "Raspunde";
             butonRaspuns1.ForeColor = Color.FromArgb(250, 242, 200);
+            butonRaspuns2.ForeColor = Color.FromArgb(250, 242, 200);
             campRaspuns.Parent = this;
             campRaspuns.Text = "";
             campRaspuns.Location = new Point(25, 400);
@@ -96,6 +107,7 @@ namespace Biologie
             campRaspuns.Update();
             butonRaspuns.Update();
             butonRaspuns1.Update();
+            butonRaspuns2.Update();
             for (int i=0;i<4;i++)
             {
                 checkboxs[i] = new RadioButton();
@@ -106,6 +118,22 @@ namespace Biologie
                 checkboxs[i].Anchor = AnchorStyles.Left;
                 checkboxs[i].Margin = margin;
                 checkboxs[i].Update();
+            }
+            xy = 350;
+            for (int i = 0; i < 4; i++)
+            {
+                radioButtonsImg[i] = new RadioButton();
+                radioButtonsImg[i].Parent = this;
+                radioButtonsImg[i].Size = new Size(1650, 55);
+
+                radioButtonsImg[i].Location = new Point(yx+=10, xy);
+                //tableLayoutPanel1.Controls.Add(radioButtonsImg[i], i+1, 1);
+                radioButtonsImg[i].Text = "TEST" + i.ToString();
+                radioButtonsImg[i].Font = new Font(radioButtonsImg[i].Font.FontFamily, 100);
+                radioButtonsImg[i].Anchor = AnchorStyles.Left;
+                //radioButtonsImg[i].Margin = margin;
+                radioButtonsImg[i].Update();
+
             }
 
             WindowState = FormWindowState.Normal;
@@ -185,23 +213,25 @@ namespace Biologie
         private void afiseazaEnunt(int id)
         {
 
-            
-                if (Questions[id].Type == 1)
-                    afiseazaEnunt1(Questions[id].QuestionText, Questions[id].Answer);
-                else if (Questions[id].Type == 0)
-                    afiseazaEnunt0(Questions[id].QuestionText, Questions[id].Answer, Questions[id].choice1, Questions[id].choice2, Questions[id].choice3, Questions[id].choice4);
-            
+
+            if (Questions[id].Type == 1)
+                afiseazaEnunt1(Questions[id].QuestionText, Questions[id].Answer);
+            else if (Questions[id].Type == 0)
+                afiseazaEnunt0(Questions[id].QuestionText, Questions[id].Answer, Questions[id].choice1, Questions[id].choice2, Questions[id].choice3, Questions[id].choice4);
+            else if (Questions[id].Type == 2) afiseazaEnunt2(Questions[id].QuestionText, Questions[id].Answer, Questions[id].choice1, Questions[id].choice2, Questions[id].choice3, Questions[id].choice4);
             
         }
         
         private void afiseazaEnunt1(string enunt, string raspuns)
         {
+            tableLayoutPanel1.Show();
             tableLayoutPanel1.Controls.Remove(butonRaspuns);
             butonRaspuns.Hide();
             tableLayoutPanel1.Controls.Add(butonRaspuns1, 0, 5);
             for (int i=0;i<4;i++)
             {
                 checkboxs[i].Hide();
+                radioButtonsImg[i].Hide();
             }
             labelCerinta.Text = enunt;
             tableLayoutPanel1.Controls.Remove(checkboxs[1]);
@@ -222,15 +252,17 @@ namespace Biologie
                 double punctaj = 90.0 / numarEnunturi;
                 decimal rezultatul = (decimal) punctaj * corecte + 10;
                 rezultatul = Math.Round(rezultatul, 2);
-                AccountTest accountTest = new AccountTest();
-                accountTest.UserId = User.Id;
-                accountTest.TestId = Test.Id;
-                db.AccountTests.Add(accountTest);
-                db.SaveChanges();
-                
-                db.Results.Add(new Result { Mark = rezultatul, AccountTestId = accountTest.Id });
-                db.SaveChanges();
-                
+                if (!exersare)
+                {
+                    AccountTest accountTest = new AccountTest();
+                    accountTest.UserId = User.Id;
+                    accountTest.TestId = Test.Id;
+                    db.AccountTests.Add(accountTest);
+                    db.SaveChanges();
+
+                    db.Results.Add(new Result { Mark = rezultatul, AccountTestId = accountTest.Id });
+                    db.SaveChanges();
+                }
                 MessageBox.Show("Rezultat: " + rezultatul + " puncte");
             }
             abandon = 1;
@@ -249,11 +281,28 @@ namespace Biologie
             for (int i = 0; i < 4; i++)
             { 
                 checkboxs[i].Show();
+                radioButtonsImg[i].Hide();
             }
             checkboxs[0].Text = v1;
             checkboxs[1].Text = v2;
             checkboxs[2].Text = v3;
             checkboxs[3].Text = v4;          
+        }
+        private void afiseazaEnunt2(string enunt, string raspuns, string v1, string v2, string v3, string v4)
+        {
+            tableLayoutPanel1.Hide();
+            tableLayoutPanel1.Controls.Remove(campRaspuns);
+            tableLayoutPanel1.Enabled = false;
+            campRaspuns.Hide();
+            tableLayoutPanel1.Controls.Remove(butonRaspuns1);
+            butonRaspuns1.Hide();
+            butonRaspuns.Hide();
+            //Checkbox Variante           
+            for (int i = 0; i < 4; i++)
+            {
+                radioButtonsImg[i].Show();
+            }
+
         }
         private int getID()
         {
@@ -287,7 +336,7 @@ namespace Biologie
 
         private void Testare_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (abandon == 0)
+             if (abandon == 0)
                 finalizareTest();            
         }
     }

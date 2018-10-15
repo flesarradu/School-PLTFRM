@@ -23,6 +23,7 @@ namespace Biologie
             fetchComboBox2();
             checkedListBox1.Items.Add("ID\tNivel \t Enunt");
             afiseazaEnunturi();
+            
         }
 
         private void afiseazaEnunturi()
@@ -101,14 +102,12 @@ namespace Biologie
                                 int id = int.Parse(words[0]);
                                 Question en = db.Questions.FirstOrDefault(s => s.Id==id );
                                 Questions.Add(en);
-                                
                             }
                         }
                         foreach (var y in Questions)
                         {
                             db.QuestionTests.Add(new QuestionTest { QuestionId = y.Id, TestId = x.Id });
                         }
-                        
                     }
                     else
                     {
@@ -169,7 +168,7 @@ namespace Biologie
                             
                         }
                     }
-                try { db.SaveChanges(); MessageBox.Show("Testul a fost adaugat in baza de date"); }
+                try { if (checkBox1.Checked) query.FirstOrDefault().Exersare = 1; db.SaveChanges(); MessageBox.Show("Testul a fost adaugat in baza de date"); }
                 catch(Exception ex)
                 {
                     MessageBox.Show("A aparut o eroare la baza de date, verificati ca enunturile sa nu se suprapuna la un singur test (un enunt, o singura data intr-un test)");

@@ -139,7 +139,6 @@ namespace Biologie
         {
             using (var db = new EntityFBio())
             {
-
                 Question intrebare = new Question();
                 if (tip == 0)
                 {
@@ -156,6 +155,16 @@ namespace Biologie
                     intrebare.Type = 1;
                     intrebare.QuestionText = cerinta;
                     intrebare.Answer = raspuns;
+                }
+                else if(tip==2)
+                {
+                    intrebare.Type = 2;
+                    intrebare.QuestionText = cerinta;
+                    intrebare.Answer = raspuns;
+                    intrebare.choice1 = var1;
+                    intrebare.choice2 = var2;
+                    intrebare.choice3 = var3;
+                    intrebare.choice4 = var4;
                 }
                 intrebare.Level = dificultate;
                 db.Questions.Add(intrebare);
@@ -195,12 +204,13 @@ namespace Biologie
                 return x.Class.ClassName;
             }
         }
-        public string getTest(string clasa)
+        public string GetTest(string clasa)
         {
             using (var db = new EntityFBio())
             {
-                var x = db.Classes.FirstOrDefault(s => s.ClassName == clasa);
-                return db.Tests.Where(s => s.ClassId == x.Id).Select(s => s.Name).FirstOrDefault();
+                //var x = db.Classes.FirstOrDefault(s => s.ClassName == clasa);
+                //return db.Tests.Where(s => s.ClassId == x.Id).Select(s => s.Name).FirstOrDefault();
+                return db.Classes.Where(x => x.ClassName == clasa).Select(x => x.Test.Name).FirstOrDefault();
             }
         }
         public List<Question> getQuestions(Test test)

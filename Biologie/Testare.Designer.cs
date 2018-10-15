@@ -44,12 +44,12 @@
             this.labelCerinta.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelCerinta.AutoSize = true;
             this.labelCerinta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelCerinta.Font = new System.Drawing.Font("Montserrat", 25.75F);
+            this.labelCerinta.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.75F);
             this.labelCerinta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
-            this.labelCerinta.Location = new System.Drawing.Point(7, 61);
+            this.labelCerinta.Location = new System.Drawing.Point(7, 57);
             this.labelCerinta.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.labelCerinta.Name = "labelCerinta";
-            this.labelCerinta.Size = new System.Drawing.Size(178, 43);
+            this.labelCerinta.Size = new System.Drawing.Size(211, 51);
             this.labelCerinta.TabIndex = 0;
             this.labelCerinta.Text = "CERINTA";
             // 
@@ -68,11 +68,11 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Montserrat", 31F, System.Drawing.FontStyle.Bold);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 31F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label4.Location = new System.Drawing.Point(1077, 7);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 52);
+            this.label4.Size = new System.Drawing.Size(61, 59);
             this.label4.TabIndex = 10;
             this.label4.Text = "X";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -81,12 +81,12 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Montserrat", 30.75F, System.Drawing.FontStyle.Bold);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30.75F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.label1.Location = new System.Drawing.Point(451, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(211, 50);
+            this.label1.Size = new System.Drawing.Size(274, 59);
             this.label1.TabIndex = 0;
             this.label1.Text = "TESTARE";
             // 
@@ -119,7 +119,7 @@
             // 
             // Testare
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(27F, 54F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(35F, 67F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.ClientSize = new System.Drawing.Size(1141, 631);
