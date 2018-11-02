@@ -36,6 +36,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,10 +61,10 @@
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(137, 16);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(10, 6, 6, 6);
+            this.comboBox1.Location = new System.Drawing.Point(235, 25);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(10, 20, 6, 6);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(155, 48);
+            this.comboBox1.Size = new System.Drawing.Size(165, 44);
             this.comboBox1.TabIndex = 0;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -86,13 +86,16 @@
             // 
             // button1
             // 
+            this.button1.AccessibleRole = System.Windows.Forms.AccessibleRole.MenuPopup;
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
-            this.button1.Location = new System.Drawing.Point(1140, 539);
+            this.button1.Location = new System.Drawing.Point(1115, 535);
             this.button1.Margin = new System.Windows.Forms.Padding(10, 3, 10, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 36);
+            this.button1.Size = new System.Drawing.Size(155, 45);
             this.button1.TabIndex = 1;
             this.button1.Text = "Adauga";
             this.button1.UseVisualStyleBackColor = true;
@@ -104,11 +107,12 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
-            this.label1.Location = new System.Drawing.Point(37, 20);
+            this.label1.Location = new System.Drawing.Point(15, 29);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 40);
+            this.label1.Size = new System.Drawing.Size(207, 36);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Test";
+            this.label1.Text = "Selectati testul";
             // 
             // splitContainer1
             // 
@@ -141,13 +145,14 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.57706F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.4767F));
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.57813F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.84375F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0.625F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.95313F));
             this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.checkBox1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.checkBox1, 3, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 53);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -155,6 +160,22 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1280, 80);
             this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.FlatAppearance.BorderSize = 0;
+            this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(142)))), ((int)(((byte)(107)))));
+            this.checkBox1.Location = new System.Drawing.Point(463, 30);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(40, 30, 3, 3);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(814, 47);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "Exersare";
+            this.checkBox1.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -189,7 +210,7 @@
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label4.Location = new System.Drawing.Point(1168, 12);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 39);
+            this.label4.Size = new System.Drawing.Size(31, 33);
             this.label4.TabIndex = 18;
             this.label4.Text = "_";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -202,7 +223,7 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.label3.Location = new System.Drawing.Point(1203, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 39);
+            this.label3.Size = new System.Drawing.Size(38, 33);
             this.label3.TabIndex = 17;
             this.label3.Text = "O";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -217,7 +238,7 @@
             this.label2.Location = new System.Drawing.Point(526, 12);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 40, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(321, 39);
+            this.label2.Size = new System.Drawing.Size(272, 33);
             this.label2.TabIndex = 16;
             this.label2.Text = "ADAUGARE TEST";
             // 
@@ -231,7 +252,7 @@
             this.label5.Location = new System.Drawing.Point(1240, 12);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 40, 3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 39);
+            this.label5.Size = new System.Drawing.Size(35, 33);
             this.label5.TabIndex = 15;
             this.label5.Text = "X";
             this.label5.Click += new System.EventHandler(this.label5_Click);
@@ -251,21 +272,9 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 583);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Location = new System.Drawing.Point(379, 25);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(40, 25, 3, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(164, 39);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Exersare";
-            this.checkBox1.UseVisualStyleBackColor = false;
-            // 
             // AdaugareTest
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 35F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(242)))), ((int)(((byte)(200)))));
             this.ClientSize = new System.Drawing.Size(1280, 720);

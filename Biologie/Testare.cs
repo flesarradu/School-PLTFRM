@@ -35,7 +35,7 @@ namespace Biologie
         Button butonRaspuns2 = new Button();
         Account User = new Account();
         FunctiiPublice functii = new FunctiiPublice();
-      
+        PictureBox[] pictureBoxes = new PictureBox[4];
         public Testare(string user, string tes, bool exersareB)
        {    
             
@@ -63,7 +63,7 @@ namespace Biologie
             int yx = 70, xy = 350;
             butonRaspuns1.Parent = this;
             butonRaspuns2.Parent = this;
-            butonRaspuns1.Location = new Point(1463, 801);
+            butonRaspuns1.Location = new Point(1263, 780);
             butonRaspuns2.Location = new Point(1263, 780);
             butonRaspuns1.Size = new Size(250, 65);
             butonRaspuns2.Size = new Size(250, 65);
@@ -76,7 +76,37 @@ namespace Biologie
             butonRaspuns1.Text = "Raspunde";
             butonRaspuns2.Text = "Raspunde";
             butonRaspuns1.ForeColor = Color.FromArgb(250, 242, 200);
-            butonRaspuns2.ForeColor = Color.FromArgb(250, 242, 200);
+            butonRaspuns2.ForeColor = Color.FromArgb(245, 142, 107);
+            butonRaspuns2.Click += (s, args) => {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (radioButtonsImg[i].Checked)
+                    {
+                        if (pictureBoxes[i].ImageLocation == Questions[lastID].Answer)
+                        {
+                            corecte++;
+                        }
+                        radioButtonsImg[i].Checked = false;
+                        numarRaspunse++;
+                        Questions[lastID].Answered = true;
+                        if (numarRaspunse < numarEnunturi)
+                        {
+                            // afiseazaEnunt(Enunturi[numarRaspunse++].id);
+                            afiseazaEnunt(getID());
+                        }
+                        else
+                        {
+                            DialogResult rez = MessageBox.Show("Doriti sa incheiati testul?", "Confirm", MessageBoxButtons.YesNoCancel);
+                            if (rez == DialogResult.Yes)
+                            {
+                                finalizareTest();
+                                Close();
+                            }
+                        }
+
+                    }
+                }
+            };
             campRaspuns.Parent = this;
             campRaspuns.Text = "";
             campRaspuns.Location = new Point(25, 400);
@@ -87,7 +117,7 @@ namespace Biologie
             campRaspuns.BackColor = Color.FromArgb(199, 209, 175);
             campRaspuns.ForeColor = Color.FromArgb(245, 142, 107);
             butonRaspuns.Parent = this;
-            butonRaspuns.Location = new Point(1463, 801);
+            butonRaspuns.Location = new Point(1263, 780);
             butonRaspuns.Size = new Size(250, 65);
             butonRaspuns.Anchor = AnchorStyles.Right;
             butonRaspuns1.Font = labelCerinta.Font;
@@ -114,27 +144,66 @@ namespace Biologie
                 checkboxs[i].Parent = this;
                 checkboxs[i].Size = new Size(1650, 55);
                 checkboxs[i].Location = new Point(yx, xy += 70);
-                tableLayoutPanel1.Controls.Add(checkboxs[i], 0, i+1);
+                //tableLayoutPanel1.Controls.Add(checkboxs[i], 0, i+1);
                 checkboxs[i].Anchor = AnchorStyles.Left;
                 checkboxs[i].Margin = margin;
                 checkboxs[i].Update();
             }
-            xy = 350;
+            yx = -75;
+            xy = 600;
             for (int i = 0; i < 4; i++)
             {
-                radioButtonsImg[i] = new RadioButton();
-                radioButtonsImg[i].Parent = this;
-                radioButtonsImg[i].Size = new Size(1650, 55);
-
-                radioButtonsImg[i].Location = new Point(yx+=10, xy);
-                //tableLayoutPanel1.Controls.Add(radioButtonsImg[i], i+1, 1);
-                radioButtonsImg[i].Text = "TEST" + i.ToString();
-                radioButtonsImg[i].Font = new Font(radioButtonsImg[i].Font.FontFamily, 100);
+                radioButtonsImg[i] = new RadioButton
+                {
+                    Parent = this,
+                    Size = new Size(55, 55),
+                    Location = new Point(yx += 325, xy),
+                    //tableLayoutPanel1.Controls.Add(radioButtonsImg[i], i+1, 1);
+                    Text = (i + 1).ToString()
+                };
                 radioButtonsImg[i].Anchor = AnchorStyles.Left;
-                //radioButtonsImg[i].Margin = margin;
+                radioButtonsImg[i].Margin = margin;
                 radioButtonsImg[i].Update();
-
             }
+            xy = 300; yx = -190;
+            for(int i = 0; i < 4; i++)
+            {
+                pictureBoxes[i] = new PictureBox
+                {
+                    Parent = this,
+                    Size = new Size(275, 275),
+                    Location = new Point(yx += 325, xy),
+                    ImageLocation = "",
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+                pictureBoxes[i].Anchor = AnchorStyles.Left;
+                pictureBoxes[i].Margin = margin;
+                pictureBoxes[i].Update();
+                
+            }
+            pictureBoxes[0].Click += (s, args) => { VizualizeazaImagine vizualizeazaImagine = new VizualizeazaImagine(pictureBoxes[0].ImageLocation);
+                vizualizeazaImagine.Ownerr = this;
+                vizualizeazaImagine.Show(); 
+                vizualizeazaImagine.FormClosed += (s1, args2) => { Activate(); };
+            };
+            pictureBoxes[1].Click += (s, args) => {
+                VizualizeazaImagine vizualizeazaImagine = new VizualizeazaImagine(pictureBoxes[1].ImageLocation);
+                vizualizeazaImagine.Ownerr = this;
+                vizualizeazaImagine.Show();
+                vizualizeazaImagine.FormClosed += (s1, args2) => { Activate(); };
+            };
+            pictureBoxes[2].Click += (s, args) => {
+                VizualizeazaImagine vizualizeazaImagine = new VizualizeazaImagine(pictureBoxes[2].ImageLocation);
+                vizualizeazaImagine.Ownerr = this;
+                vizualizeazaImagine.Show();
+                vizualizeazaImagine.FormClosed += (s1, args2) => { Activate(); };
+            };
+            pictureBoxes[3].Click += (s, args) => {
+                VizualizeazaImagine vizualizeazaImagine = new VizualizeazaImagine(pictureBoxes[3].ImageLocation);
+                vizualizeazaImagine.Ownerr = this;
+                vizualizeazaImagine.Show();
+                vizualizeazaImagine.FormClosed += (s1, args2) => { Activate(); };
+            };
 
             WindowState = FormWindowState.Normal;
             FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -224,20 +293,22 @@ namespace Biologie
         
         private void afiseazaEnunt1(string enunt, string raspuns)
         {
-            tableLayoutPanel1.Show();
-            tableLayoutPanel1.Controls.Remove(butonRaspuns);
+            //tableLayoutPanel1.Show();
+            //tableLayoutPanel1.Controls.Remove(butonRaspuns);
             butonRaspuns.Hide();
-            tableLayoutPanel1.Controls.Add(butonRaspuns1, 0, 5);
+            butonRaspuns2.Hide();
+            //tableLayoutPanel1.Controls.Add(butonRaspuns1, 0, 5);
             for (int i=0;i<4;i++)
             {
                 checkboxs[i].Hide();
                 radioButtonsImg[i].Hide();
+                pictureBoxes[i].Hide();
             }
             labelCerinta.Text = enunt;
-            tableLayoutPanel1.Controls.Remove(checkboxs[1]);
+            //tableLayoutPanel1.Controls.Remove(checkboxs[1]);
             //Camp de Raspuns
 
-            tableLayoutPanel1.Controls.Add(campRaspuns, 0, 2);
+            //tableLayoutPanel1.Controls.Add(campRaspuns, 0, 2);
             campRaspuns.Show();
 
             //Buton raspuns
@@ -269,12 +340,13 @@ namespace Biologie
         }
         private void afiseazaEnunt0(string enunt, string raspuns, string v1, string v2, string v3, string v4)
         {
-            tableLayoutPanel1.Controls.Remove(campRaspuns);
+            //tableLayoutPanel1.Controls.Remove(campRaspuns);
             campRaspuns.Hide();
-            tableLayoutPanel1.Controls.Remove(butonRaspuns1);
+            //tableLayoutPanel1.Controls.Remove(butonRaspuns1);
             butonRaspuns1.Hide();
-            tableLayoutPanel1.Controls.Add(butonRaspuns, 0, 5);
-            tableLayoutPanel1.Controls.Add(checkboxs[1], 0, 2);
+            butonRaspuns2.Hide();
+            //tableLayoutPanel1.Controls.Add(butonRaspuns, 0, 5);
+            //tableLayoutPanel1.Controls.Add(checkboxs[1], 0, 2);
             labelCerinta.Text = enunt;
             butonRaspuns.Show();
             //Checkbox Variante           
@@ -282,6 +354,7 @@ namespace Biologie
             { 
                 checkboxs[i].Show();
                 radioButtonsImg[i].Hide();
+                pictureBoxes[i].Hide();
             }
             checkboxs[0].Text = v1;
             checkboxs[1].Text = v2;
@@ -290,18 +363,24 @@ namespace Biologie
         }
         private void afiseazaEnunt2(string enunt, string raspuns, string v1, string v2, string v3, string v4)
         {
-            tableLayoutPanel1.Hide();
-            tableLayoutPanel1.Controls.Remove(campRaspuns);
-            tableLayoutPanel1.Enabled = false;
+            //tableLayoutPanel1.Hide();
+            //tableLayoutPanel1.Controls.Remove(campRaspuns);
+            //tableLayoutPanel1.Enabled = false;
             campRaspuns.Hide();
-            tableLayoutPanel1.Controls.Remove(butonRaspuns1);
+            //tableLayoutPanel1.Controls.Remove(butonRaspuns1);
             butonRaspuns1.Hide();
             butonRaspuns.Hide();
+            butonRaspuns2.Show();
             //Checkbox Variante           
             for (int i = 0; i < 4; i++)
             {
                 radioButtonsImg[i].Show();
+                checkboxs[i].Hide();
             }
+            pictureBoxes[0].ImageLocation = v1;
+            pictureBoxes[1].ImageLocation = v2;
+            pictureBoxes[2].ImageLocation = v3;
+            pictureBoxes[3].ImageLocation = v4;
 
         }
         private int getID()

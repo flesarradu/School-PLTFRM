@@ -61,7 +61,8 @@ namespace Biologie
                         labels[i].Anchor = AnchorStyles.Top;
                         labels[i].ForeColor = comboBox1.ForeColor;
                         labels[i].Show();
-                        
+
+                        pictureBoxes[i].Hide();
                         this.Controls.Add(labels[i]);
                         //TextBoxes
                         textBoxs[i].Location = new Point(x + 50, y);
@@ -124,7 +125,7 @@ namespace Biologie
                         pictureBoxes[i].Size = new Size(150,150);
                         pictureBoxes[i].Parent = this;
                         pictureBoxes[i].Anchor = AnchorStyles.Top;
-                        pictureBoxes[i].ImageLocation = "https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-9/22853109_1533778786658799_6439743616560860887_n.jpg?_nc_cat=0&oh=19a69e80155b7eb833231e1d2e2383b7&oe=5C38D7DB";
+                        pictureBoxes[i].ImageLocation = "https://i.imgur.com/PCammDf.png";
                         pictureBoxes[i].SizeMode = PictureBoxSizeMode.StretchImage;
                         pictureBoxes[i].Update();
                         pictureBoxes[i].Show();
@@ -186,7 +187,7 @@ namespace Biologie
                             for (int i = 0; i < 4; i++)
                             {
                                 if (checkBoxs[i].Checked)
-                                    rezultat = i.ToString();
+                                    rezultat = pictureBoxes[i].ImageLocation;
                             }
                             string img1, img2, img3, img4;
                             img1 = pictureBoxes[0].ImageLocation;

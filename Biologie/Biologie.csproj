@@ -251,6 +251,12 @@
     <Compile Include="VizualizareRezultate.Designer.cs">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
     </Compile>
+    <Compile Include="VizualizeazaImagine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VizualizeazaImagine.Designer.cs">
+      <DependentUpon>VizualizeazaImagine.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdaugareElev.resx">
       <DependentUpon>AdaugareElev.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VizualizareRezultate.resx">
       <DependentUpon>VizualizareRezultate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VizualizeazaImagine.resx">
+      <DependentUpon>VizualizeazaImagine.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.Config">
       <SubType>Designer</SubType>

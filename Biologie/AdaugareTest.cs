@@ -90,6 +90,8 @@ namespace Biologie
             {
                 var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
                 
+                
+
                 foreach (var x in query)
                     if (faraEnunturi(x))
                     {
