@@ -166,6 +166,8 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "_";
             this.label5.Click += new System.EventHandler(this.label5_Click);
+            this.label5.MouseEnter += new System.EventHandler(this.label5_MouseEnter);
+            this.label5.MouseLeave += new System.EventHandler(this.label5_MouseLeave);
             // 
             // label6
             // 
@@ -179,6 +181,8 @@
             this.label6.TabIndex = 2;
             this.label6.Text = "O";
             this.label6.Click += new System.EventHandler(this.label6_Click);
+            this.label6.MouseEnter += new System.EventHandler(this.label6_MouseEnter);
+            this.label6.MouseLeave += new System.EventHandler(this.label6_MouseLeave);
             // 
             // label7
             // 
@@ -204,6 +208,8 @@
             this.label8.TabIndex = 1;
             this.label8.Text = "X";
             this.label8.Click += new System.EventHandler(this.label8_Click);
+            this.label8.MouseEnter += new System.EventHandler(this.label8_MouseEnter);
+            this.label8.MouseLeave += new System.EventHandler(this.label8_MouseLeave);
             // 
             // panel7
             // 

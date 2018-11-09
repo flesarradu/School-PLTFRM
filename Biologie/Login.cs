@@ -114,5 +114,17 @@ namespace Biologie
         {
             button1_Click_1(sender, e);
         }
+
+        private void label4_MouseEnter(object sender, EventArgs e)
+        {
+            label4.Font = new Font(label4.Font, FontStyle.Bold);
+            label4.ForeColor = Color.FromArgb(70,177, 53, 12);
+        }
+
+        private void label4_MouseLeave(object sender, EventArgs e)
+        {
+            label4.Font = new Font(label4.Font, FontStyle.Regular);
+            label4.ForeColor = Color.FromArgb(250, 242, 200);
+        }
     }
 }

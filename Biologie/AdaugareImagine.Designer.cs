@@ -33,12 +33,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -82,6 +82,8 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "X";
             this.label5.Click += new System.EventHandler(this.label5_Click_1);
+            this.label5.MouseEnter += new System.EventHandler(this.label5_MouseEnter);
+            this.label5.MouseLeave += new System.EventHandler(this.label5_MouseLeave);
             // 
             // tableLayoutPanel1
             // 
@@ -113,6 +115,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(794, 642);
             this.panel2.TabIndex = 1;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.textBox2.Location = new System.Drawing.Point(93, 560);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(293, 36);
+            this.textBox2.TabIndex = 21;
+            this.textBox2.Visible = false;
             // 
             // comboBox1
             // 
@@ -163,14 +174,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.textBox2.Location = new System.Drawing.Point(93, 560);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(293, 36);
-            this.textBox2.TabIndex = 21;
-            // 
             // AdaugareImagine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -179,6 +182,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AdaugareImagine";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AdaugareImagine";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

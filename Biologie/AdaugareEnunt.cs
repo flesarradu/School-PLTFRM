@@ -254,5 +254,41 @@ namespace Biologie
         {
 
         }
+
+        private void label8_MouseEnter(object sender, EventArgs e)
+        {
+            label8.Font = new Font(label8.Font, FontStyle.Bold);
+            label8.ForeColor = Color.FromArgb(70, 177, 53, 12);
+        }
+
+        private void label8_MouseLeave(object sender, EventArgs e)
+        {
+            label8.Font = new Font(label8.Font, FontStyle.Regular);
+            label8.ForeColor = Color.FromArgb(250, 242, 200);
+        }
+
+        private void label6_MouseEnter(object sender, EventArgs e)
+        {
+            label6.Font = new Font(label6.Font, FontStyle.Bold);
+            label6.ForeColor = Color.FromArgb(70, 177, 53, 12);
+        }
+
+        private void label6_MouseLeave(object sender, EventArgs e)
+        {
+            label6.Font = new Font(label6.Font, FontStyle.Regular);
+            label6.ForeColor = Color.FromArgb(250, 242, 200);
+        }
+
+        private void label5_MouseEnter(object sender, EventArgs e)
+        {
+            label5.Font = new Font(label5.Font, FontStyle.Bold);
+            label5.ForeColor = Color.FromArgb(70, 177, 53, 12);
+        }
+
+        private void label5_MouseLeave(object sender, EventArgs e)
+        {
+            label5.Font = new Font(label5.Font, FontStyle.Regular);
+            label5.ForeColor = Color.FromArgb(250, 242, 200);
+        }
     }
 }

@@ -50,5 +50,17 @@ namespace Biologie
         {
             Close();
         }
+
+        private void label5_MouseEnter(object sender, EventArgs e)
+        {
+            label5.Font = new Font(label5.Font, FontStyle.Bold);
+            label5.ForeColor = Color.FromArgb(70, 177, 53, 12);
+        }
+
+        private void label5_MouseLeave(object sender, EventArgs e)
+        {
+            label5.Font = new Font(label5.Font, FontStyle.Regular);
+            label5.ForeColor = Color.FromArgb(250, 242, 200);
+        }
     }
 }

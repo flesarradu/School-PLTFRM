@@ -38,7 +38,7 @@ namespace Biologie
         {
             SchimbaParola visa = new SchimbaParola(user);
             Hide();
-            visa.Closed += (s, args) => Close();
+            visa.Closed += (s, args) => Show();
             visa.Show();
         }
 
