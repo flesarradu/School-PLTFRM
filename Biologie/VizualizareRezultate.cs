@@ -34,7 +34,7 @@ namespace Biologie
         {
             if (comboBox1.SelectedItem.ToString() != "Toate")
             {
-                using (var db = new EntityFBio())
+                using (var db = new MapProjectDatabaseEntities())
                 {
                     int classId = db.Classes.Where(s => s.ClassName == comboBox1.SelectedItem.ToString()).FirstOrDefault().Id;
                     populateList(classId);
@@ -47,7 +47,7 @@ namespace Biologie
                 string Mark = "";
                 string Test = "";
                 string User = "";
-                using (var db = new EntityFBio())
+                using (var db = new MapProjectDatabaseEntities())
                 {
                     foreach (var x in db.Results)
                     {
@@ -69,7 +69,7 @@ namespace Biologie
             string Mark = "";
             string Test = "";
             string User = "";
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 foreach(var x in db.Results)
                 {
@@ -86,7 +86,7 @@ namespace Biologie
         private void fetchComboBox()
         {
             comboBox1.Items.Add("Toate");
-            using(var db = new EntityFBio())
+            using(var db = new MapProjectDatabaseEntities())
             {
                 foreach(var x in db.Classes)
                 {

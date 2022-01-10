@@ -5,14 +5,14 @@ namespace Biologie.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Biologie.EntityFramework.EntityFBio>
+    internal sealed class Configuration : DbMigrationsConfiguration<Biologie.EntityFramework.MapProjectDatabaseEntities>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Biologie.EntityFramework.EntityFBio context)
+        protected override void Seed(Biologie.EntityFramework.MapProjectDatabaseEntities context)
         {
             //  This method will be called after migrating to the latest version.
 

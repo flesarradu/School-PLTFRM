@@ -18,7 +18,7 @@ namespace Biologie
         {
             InitializeComponent();
             user = str;
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                foreach(var x in db.Tests)
                 {

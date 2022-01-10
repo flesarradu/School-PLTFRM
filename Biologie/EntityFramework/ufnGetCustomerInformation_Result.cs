@@ -11,9 +11,10 @@ namespace Biologie.EntityFramework
 {
     using System;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class ufnGetCustomerInformation_Result
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int CustomerID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

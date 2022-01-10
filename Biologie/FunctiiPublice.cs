@@ -15,18 +15,17 @@ namespace Biologie
         public bool verificaCont(string user, string password)
         {
 
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
 
                 var cont = db.Accounts.Where(s => s.User == user).Select(s => s).FirstOrDefault();
                 return (cont.Password == password) ? true : false;
                                     
             }
-            return false;
         }
         public bool verificaUser(string user)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 if (db.Accounts.Any(s => (s.User == user)))
                     return true;
@@ -36,7 +35,7 @@ namespace Biologie
         }
         public int returneazaID(string user)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                int id = db.Accounts.Where(s => s.User == user).Select(s => s.Id).FirstOrDefault();
                return id;
@@ -44,7 +43,7 @@ namespace Biologie
         }
         public bool isAdmin(string user)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 return (db.Accounts.Where(s => s.User==user).Select(s=>s.Class.ClassName).FirstOrDefault() == "Admin") ? true : false;
             }
@@ -55,7 +54,7 @@ namespace Biologie
             {
                 try
                 {
-                    using (var db = new EntityFBio())
+                    using (var db = new MapProjectDatabaseEntities())
                     {
                         Account account = new Account();
                         account.User = user;
@@ -66,7 +65,7 @@ namespace Biologie
                              MessageBox.Show("Cont creat cu succes(user= " + user + ")");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("A aparut o eroare la baza de date, contactati developerul cat mai rapid.");
                 }
@@ -84,7 +83,7 @@ namespace Biologie
             {
                 try
                 {
-                    using (var db = new EntityFBio())
+                    using (var db = new MapProjectDatabaseEntities())
                     {
                         Test test = new Test();
                         test.Name = nume;
@@ -100,7 +99,7 @@ namespace Biologie
                         MessageBox.Show("Testul cu numele " + nume +", id "+ test.Id +" care contine enunturile cu id:" + enunt +" a fost creeat si introdus cu succes in baza de date");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("A aparut o eroare la baza de date, contactati developerul cat mai rapid.");
                 }
@@ -116,7 +115,7 @@ namespace Biologie
             {
                 try
                 {
-                    using (var db = new EntityFBio())
+                    using (var db = new MapProjectDatabaseEntities())
                     {
                         Test test = new Test();
                         test.Name = nume;                       
@@ -125,7 +124,7 @@ namespace Biologie
                         MessageBox.Show("Testul cu numele " + nume + ", id " + test.Id + " a fost adaugat in baza de date");
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("A aparut o eroare la baza de date, contactati developerul cat mai rapid.");
                 }
@@ -137,7 +136,7 @@ namespace Biologie
         }
         public void adaugaEnunt(int dificultate, string cerinta, int tip, string raspuns, string var1, string var2, string var3, string var4)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 Question intrebare = new Question();
                 if (tip == 0)
@@ -178,7 +177,7 @@ namespace Biologie
 
         public bool verificaTest(string nume)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 if (db.Tests.Any(s => (s.Name == nume)))
                     return true;
@@ -189,7 +188,7 @@ namespace Biologie
                 
         public void schimbaParola(string user, string password)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 var x = db.Accounts.FirstOrDefault(s => s.User == user);
                 x.Password = password;
@@ -198,7 +197,7 @@ namespace Biologie
         }
         public string getClasa(string user)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 var x = db.Accounts.FirstOrDefault(s => s.User == user);
                 return x.Class.ClassName;
@@ -206,7 +205,7 @@ namespace Biologie
         }
         public string GetTest(string clasa)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 //var x = db.Classes.FirstOrDefault(s => s.ClassName == clasa);
                 //return db.Tests.Where(s => s.ClassId == x.Id).Select(s => s.Name).FirstOrDefault();
@@ -216,7 +215,7 @@ namespace Biologie
         public List<Question> getQuestions(Test test)
         {
             List<Question> Questions = new List<Question>();
-            using (EntityFBio db = new EntityFBio())
+            using (MapProjectDatabaseEntities db = new MapProjectDatabaseEntities())
             {
                 var QuestionsTests = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s);
                 foreach (var x in QuestionsTests)

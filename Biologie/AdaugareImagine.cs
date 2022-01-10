@@ -32,7 +32,7 @@ namespace Biologie
 
         private void fetchComboBox()
         {
-            using(var db = new EntityFBio())
+            using(var db = new MapProjectDatabaseEntities())
             {
                 foreach(var x in db.Images)
                 {
@@ -62,7 +62,7 @@ namespace Biologie
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 DialogResult x = MessageBox.Show("Esti sigur ca doresti sa adaugi imaginea in baza de date?", "", MessageBoxButtons.YesNo);
                 if (x == DialogResult.Yes)

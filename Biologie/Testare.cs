@@ -43,7 +43,7 @@ namespace Biologie
             test = tes;
             u = user;
             exersare = exersareB;
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 Test = db.Tests.FirstOrDefault(s => s.Name == tes);
                 Questions = functii.getQuestions(Test);
@@ -318,7 +318,7 @@ namespace Biologie
         }
         private void finalizareTest()
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 double punctaj = 90.0 / numarEnunturi;
                 decimal rezultatul = (decimal) punctaj * corecte + 10;

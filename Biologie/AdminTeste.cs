@@ -17,7 +17,7 @@ namespace Biologie
         {
             InitializeComponent();
 
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 foreach (var x in db.Tests)
                 {
@@ -35,7 +35,7 @@ namespace Biologie
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 //var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
                 //foreach (var x in query)

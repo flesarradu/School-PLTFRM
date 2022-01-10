@@ -28,7 +28,7 @@ namespace Biologie
 
         private void afiseazaEnunturi()
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 var query = from x in db.Questions select x;
                 foreach (var x in query)
@@ -72,7 +72,7 @@ namespace Biologie
         private void fetchComboBox2()
         {
             comboBox1.Items.Clear();
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 var query = from x in db.Tests select x;
                 foreach (var x in query)
@@ -86,7 +86,7 @@ namespace Biologie
         private void button1_Click(object sender, EventArgs e)
         {
             List<Question> Questions = new List<Question>();
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 var query = db.Tests.Where(x => x.Name == comboBox1.SelectedItem.ToString());
                 
@@ -171,7 +171,7 @@ namespace Biologie
                         }
                     }
                 try { if (checkBox1.Checked) query.FirstOrDefault().Exersare = 1; db.SaveChanges(); MessageBox.Show("Testul a fost adaugat in baza de date"); }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     MessageBox.Show("A aparut o eroare la baza de date, verificati ca enunturile sa nu se suprapuna la un singur test (un enunt, o singura data intr-un test)");
                 }
@@ -200,7 +200,7 @@ namespace Biologie
         }
         public bool faraEnunturi(Test test)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 int x = 0;
                 foreach(var y in db.QuestionTests)
@@ -217,7 +217,7 @@ namespace Biologie
         public List<Question> getQuestions(Test test)
         {
             List<Question> Questions = new List<Question>();
-            using (EntityFBio db = new EntityFBio())
+            using (MapProjectDatabaseEntities db = new MapProjectDatabaseEntities())
             {
                 var QuestionsTests = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s);
                 foreach (var x in QuestionsTests)
@@ -229,7 +229,7 @@ namespace Biologie
         }
         public bool clearTest(Test test)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 var query = db.QuestionTests.Where(s => s.TestId == test.Id).Select(s => s);
                 foreach (var x in query)

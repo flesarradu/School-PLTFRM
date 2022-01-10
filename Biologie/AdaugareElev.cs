@@ -16,7 +16,7 @@ namespace Biologie
         public AdaugareElev()
         {
             InitializeComponent();
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 foreach(var x in db.Classes)
                 {
@@ -32,7 +32,7 @@ namespace Biologie
             int clasa=0;
             if (checkBox1.Checked)
                clasa = 1;
-            using(var db = new EntityFBio())
+            using(var db = new MapProjectDatabaseEntities())
             {
                 clasa = db.Classes.Where(s => s.ClassName == comboBox1.SelectedItem.ToString()).FirstOrDefault().Id;
             }

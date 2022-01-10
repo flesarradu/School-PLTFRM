@@ -22,7 +22,7 @@ namespace Biologie
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var db = new EntityFBio())
+            using (var db = new MapProjectDatabaseEntities())
             {
                 string test, clasa;
                 clasa = functii.getClasa(user);
